@@ -1,0 +1,116 @@
+@media (max-width: 480px) {
+  .inputContainer {
+    flex-direction: column;
+  }
+
+  .inputContainer label,
+  .inputContainer input {
+    width: 100%;
+  }
+
+  .container {
+    flex-direction: column;
+  }
+
+  .tablaAlimentos {
+    font-size: 12px;
+  }
+}
+
+.tablaAlimentos {
+  width: 100%; /* Ajustar al ancho de su contenedor */
+  overflow-x: auto; /* Agregar desplazamiento horizontal si es necesario */
+  white-space: nowrap; /* Evitar que el texto se envuelva */
+}
+
+
+
+.boton-container {
+  text-align: center;
+}
+
+
+.topInputs {
+
+  margin-bottom: 10px ;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+
+}
+
+.bottomInputs {
+
+  margin-bottom: 10px ;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+
+}
+
+
+
+.boton {
+  background-color: #4ca5af; /* Color de fondo */
+  border: none; /* Sin borde */
+  color: white; /* Color del texto */
+  padding: 15px 25px; /* Espaciado interno */
+  text-align: center; /* Alineación del texto */
+  text-decoration: none; /* Sin subrayado */
+  display: inline-block; /* Mostrar como elemento en línea */
+  font-size: 20px; /* Tamaño de la fuente */
+  margin: 6px 200px; /* Margen exterior */
+  transition-duration: 0.4s; /* Duración de la transición */
+  cursor: pointer; /* Cambiar el cursor al pasar por encima */
+
+
+  /* Sombra */
+  box-shadow: 0px 8px 16px rgba(0,0,0,0.2);
+}
+
+/* Cambiar el estilo al pasar el mouse */
+.boton:hover {
+  background-color: #45a049; /* Cambiar el color de fondo */
+  box-shadow: 0px 12px 20px rgba(0,0,0,0.4); /* Cambiar la sombra */
+}
+
+.inputContainer {
+  margin: 0 10px;
+}
+
+.labelContainer {
+  margin-bottom: 5px;
+}
+
+.classSelect {
+ background-color: antiquewhite;
+}
+
+.inputImportante {
+  width: 35px; /* Ajusta el ancho según sea necesario */
+  color:blue;
+  font-weight: bold;
+}
+
+
+
+
+.inputNumerico {
+    width: 35px; /* Ajusta el ancho del input aquí */
+    /* Otros estilos si es necesario */
+  }
+
+  .th-letras {
+    font-size: 10px !important;
+  }
+  .tablaAlimentos {
+    width: 200px; /* Por ejemplo */
+    height: 200px; /* Por ejemplo */
+    margin: auto;
+    position: absolute;
+    top: 0; bottom: 0;
+    left: 0; right: 0;
+
+  }
