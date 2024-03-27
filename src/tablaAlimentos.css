@@ -3,6 +3,10 @@
     flex-direction: column;
   }
 
+  
+
+  
+
   .inputContainer label,
   .inputContainer input {
     width: 100%;
@@ -11,6 +15,9 @@
   .container {
     flex-direction: column;
   }
+
+  
+  
 
   .tablaAlimentos {
     font-size: 12px;
@@ -28,6 +35,19 @@
 .boton-container {
   text-align: center;
 }
+
+.inputImportante {
+  width: 35px; /* Ajusta el ancho según sea necesario */
+  color:black;
+  font-weight: bold;
+  background-color: rgb(144, 238, 197);
+  border-radius: .3125rem;
+  border-style:solid;
+  border-color: black;
+  border-width: 1px;
+  
+}
+
 
 
 .topInputs {
@@ -88,11 +108,7 @@
  background-color: antiquewhite;
 }
 
-.inputImportante {
-  width: 35px; /* Ajusta el ancho según sea necesario */
-  color:blue;
-  font-weight: bold;
-}
+
 
 
 

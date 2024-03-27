@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './tablaAlimentos.css';
+import Select from 'react-select';
 
 function TablaAlimentos() {
     const [alimentos, setAlimentos] = useState([
@@ -35,7 +36,7 @@ function TablaAlimentos() {
         const obtenerAlimentos = async () => {
             try {
                 console.log("Obteniendo alimentos")
-                const response = await axios.get("https://apifoods-production.up.railway.app/api/alimentos");
+                const response = await axios.get("http://localhost:8080/api/alimentos");
                 setListaAlimentos(response.data);
 
             } catch (error) {
@@ -47,11 +48,10 @@ function TablaAlimentos() {
     }, []);
 
 
-    const handleChange = (e, index, campo) => {
-        const { value } = e.target;
+    const handleChange = (selectedOption, index, campo) => {
         setAlimentos(prevAlimentos => {
             const nuevosAlimentos = [...prevAlimentos];
-            nuevosAlimentos[index][campo] = value;
+            nuevosAlimentos[index][campo] = selectedOption.value; // Obteniendo el valor seleccionado
             return nuevosAlimentos;
         });
     };
@@ -72,7 +72,7 @@ function TablaAlimentos() {
         await handleGenerar();
         setCaloriasTotales(0)
 
-        const response = await axios.get(`https://apifoods-production.up.railway.app/api/alimentos/distribuciones?alimento1=${alimentos[0].nombre}&alimento2=${alimentos[1].nombre}&alimento3=${alimentos[2].nombre}&alimento4=${alimentos[3].nombre}&alimento5=${alimentos[4].nombre}&alimento6=${alimentos[5].nombre}&alimento7=${alimentos[6].nombre}&proteinas=${proteinas}&carbohidratos=${carbohidratos}&grasas=${grasas}&calorias=${calorias}`);
+        const response = await axios.get(`http://localhost:8080/api/alimentos/distribuciones?alimento1=${alimentos[0].nombre}&alimento2=${alimentos[1].nombre}&alimento3=${alimentos[2].nombre}&alimento4=${alimentos[3].nombre}&alimento5=${alimentos[4].nombre}&alimento6=${alimentos[5].nombre}&alimento7=${alimentos[6].nombre}&proteinas=${proteinas}&carbohidratos=${carbohidratos}&grasas=${grasas}&calorias=${calorias}`);
         console.log(response.data)
         let matrizDeAlimentos = response.data;
         console.log("Largo de la matriz final")
@@ -195,7 +195,7 @@ function TablaAlimentos() {
         const nuevasComidas = document.querySelectorAll('.tablaAlimentos tbody tr');
         const nuevosAlimentos = [];
         nuevasComidas.forEach(comida => {
-            const nombre = comida.querySelector('td:first-child select').value;
+            const nombre = comida.querySelector('td:first-child select');
             nuevosAlimentos.push({ nombre, cantidad: '', proteinas: '', carbohidratos: '', grasas: '', calorias: '' });
         });
         setAlimentos(nuevosAlimentos);
@@ -210,7 +210,7 @@ function TablaAlimentos() {
 
 
 
-            <div style={{ marginTop: '80px' }}>
+            <div style={{ marginTop: '80px'}}>
 
                 <div className="container topInputs">
                     <div className="inputContainer">
@@ -262,7 +262,7 @@ function TablaAlimentos() {
                 </div>
 
 
-                <div className="container bottomInputs">
+                <div  className="container bottomInputs">
                     <div className="inputContainer">
                         <label htmlFor="Proteinas">Proteinas</label>
                         <input
@@ -310,7 +310,7 @@ function TablaAlimentos() {
 
 
 
-            <table className='tablaAlimentos' style={{ backgroundColor: 'lightblue', padding: '20px', border: '2px solid black' }}>
+            <table className='tablaAlimentos' style={{ backgroundColor: 'lightblue', padding: '20px', border: '2px solid black', marginTop:'200px' }}>
                 <thead>
                     <tr>
                         <th>Nombre</th>
@@ -327,17 +327,19 @@ function TablaAlimentos() {
                     {alimentos.map((alimento, index) => (
                         <tr key={index}>
                             <td>
-                                <select
+                                <Select
                                     className='classSelect'
-                                    value={alimento.nombre}
-                                    onChange={e => handleChange(e, index, 'nombre')}
-                                    onKeyDown={e => handleKeyDown(e, index)}
-                                >
-                                    <option value="">Seleccione un alimento</option>
-                                    {listaAlimentos.map((alim, idx) => (
-                                        <option key={idx} value={alim.Alimentos}>{alim.Alimentos}</option>
-                                    ))}
-                                </select>
+                                    value={{ value: alimento.nombre, label: alimento.nombre }} // Establece el valor y la etiqueta seleccionada
+                                    onChange={(selectedOption) => handleChange(selectedOption, index, 'nombre')} // Llama a la función handleChange cuando se selecciona una opción
+                                    options={listaAlimentos.map(alim => ({ value: alim.Alimentos, label: alim.Alimentos }))} // Establece las opciones disponibles
+                                    styles={{
+                                        control: (provided, state) => ({
+                                            ...provided,
+                                            minHeight: '30px', // Reducir el tamaño vertical del control
+                                            width: '200px', // Aumentar el tamaño horizontal del control
+                                        }),
+                                    }}
+                                />
                             </td>
 
 
@@ -345,7 +347,7 @@ function TablaAlimentos() {
 
 
 
-                            <td style={{ display: 'flex', alignItems: 'center' }}>
+                            <td>
                                 <input
                                     className='inputImportante'
                                     type="text"
@@ -353,6 +355,7 @@ function TablaAlimentos() {
                                     onChange={e => handleChange(e, index, 'cantidad')} // Permitir la edición de cantidad
                                 />
                                 <input
+                                    style={{ fontSize: '10px' , width: '15px' }}
                                     className='inputImportante'
                                     type="text"
                                     value={alimento.unidad}
