@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './tablaAlimentos.css';
 import Select from 'react-select';
+import Calorias from './Calorias/Calorias';
 
 function TablaAlimentos() {
     const [alimentos, setAlimentos] = useState([
@@ -208,105 +209,13 @@ function TablaAlimentos() {
     return (
         <>
 
+            <Calorias proteinas = {proteinas} carbohidratos = {carbohidratos} grasas = {grasas} setProteinas = {setProteinas}
+            setCarbohidratos =  {setCarbohidratos} setGrasas= {setGrasas} calorias = {calorias} setCalorias = {setCalorias}/>
 
+            <Calorias proteinas = {proteinasTotales} carbohidratos = {carbohidratosTotales} grasas = {grasasTotales} setProteinas = {setProteinasTotales}
+            setCarbohidratos =  {setCarbohidratosTotales} setGrasas= {setGrasasTotales} calorias = {caloriasTotales} setCalorias = {setCaloriasTotales}/>
 
-            <div style={{ marginTop: '80px', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-
-                <div className="container topInputs">
-                    <div className="inputContainer">
-                        <label htmlFor="Proteinas">Proteinas</label>
-                        <input
-                            className="inputNumerico"
-                            type="text"
-                            value={proteinas}
-                            onChange={(e) => {
-                                setProteinas(e.target.value);
-
-                            }}
-                        />
-                    </div>
-                    <div className="inputContainer">
-                        <label htmlFor="Carbohidratos">Carbohidratos</label>
-                        <input
-                            className="inputNumerico"
-                            type="text"
-                            value={carbohidratos}
-                            onChange={(e) => {
-                                setCarbohidratos(e.target.value);
-
-                            }}
-                        />
-                    </div>
-                    <div className="inputContainer">
-                        <label htmlFor="Grasas">Grasas</label>
-                        <input
-                            className="inputNumerico"
-                            type="text"
-                            value={grasas}
-                            onChange={(e) => {
-                                setGrasas(e.target.value);
-
-                            }}
-                        />
-                    </div>
-                    <div className="inputContainer">
-                        <label htmlFor="Calorias">Calorias</label>
-                        <input
-                            className="inputNumerico"
-                            type="text"
-                            value={calorias}
-                            onChange={(e) => setCalorias(e.target.value)}
-
-                        />
-                    </div>
-                </div>
-
-
-                <div  className="container bottomInputs">
-                    <div className="inputContainer">
-                        <label htmlFor="Proteinas">Proteinas</label>
-                        <input
-                            className="inputNumerico"
-                            type="text"
-                            value={proteinasTotales}
-                            onChange={(e) => setProteinasTotales(e.target.value)}
-                        />
-                    </div>
-                    <div className="inputContainer">
-                        <label htmlFor="Carbohidratos">Carbohidratos</label>
-                        <input
-                            className="inputNumerico"
-                            type="text"
-                            value={carbohidratosTotales}
-                            onChange={(e) => setCarbohidratosTotales(e.target.value)}
-                        />
-                    </div>
-                    <div className="inputContainer">
-                        <label htmlFor="Grasas">Grasas</label>
-                        <input
-                            className="inputNumerico"
-                            type="text"
-                            value={grasasTotales}
-                            onChange={(e) => setGrasasTotales(e.target.value)}
-                        />
-                    </div>
-                    <div className="inputContainer">
-                        <label htmlFor="Calorias">Calorias</label>
-                        <input
-                            className="inputNumerico"
-                            type="text"
-                            value={caloriasTotales}
-                            onChange={(e) => setCaloriasTotales(e.target.value)}
-                        />
-                    </div>
-                </div>
-
-
-
-
-            </div>
-
-
+            
 
 
 
