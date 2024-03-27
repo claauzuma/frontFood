@@ -14,10 +14,7 @@ function App() {
   <Bienvenida/>
 
   <TablaAlimentos/>
-  <TablaAlimentos/>
-  <TablaAlimentos/>
-  <TablaAlimentos/>
-  <TablaAlimentos/>
+
   </>
   )
 }

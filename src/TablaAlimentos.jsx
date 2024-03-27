@@ -215,7 +215,7 @@ function TablaAlimentos() {
             <Calorias proteinas = {proteinasTotales} carbohidratos = {carbohidratosTotales} grasas = {grasasTotales} setProteinas = {setProteinasTotales}
             setCarbohidratos =  {setCarbohidratosTotales} setGrasas= {setGrasasTotales} calorias = {caloriasTotales} setCalorias = {setCaloriasTotales}/>
 
-            
+            <h1>Hola</h1>
             <table className='tablaAlimentos' style={{ backgroundColor: 'lightblue',  border: '2px solid black'}}>
                 <thead>
                     <tr>
