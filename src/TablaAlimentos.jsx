@@ -210,7 +210,7 @@ function TablaAlimentos() {
 
 
 
-            <div style={{ marginTop: '80px'}}>
+            <div style={{ marginTop: '80px', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
 
                 <div className="container topInputs">
                     <div className="inputContainer">
