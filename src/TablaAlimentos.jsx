@@ -216,10 +216,7 @@ function TablaAlimentos() {
             setCarbohidratos =  {setCarbohidratosTotales} setGrasas= {setGrasasTotales} calorias = {caloriasTotales} setCalorias = {setCaloriasTotales}/>
 
             
-
-
-
-            <table className='tablaAlimentos' style={{ backgroundColor: 'lightblue', padding: '20px', border: '2px solid black', marginTop:'200px' }}>
+            <table className='tablaAlimentos' style={{ backgroundColor: 'lightblue',  border: '2px solid black'}}>
                 <thead>
                     <tr>
                         <th>Nombre</th>

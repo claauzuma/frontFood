@@ -3,6 +3,20 @@
     flex-direction: column;
   }
 
+  .tablaAlimentos {
+    width: 100%; /* Ajustar al ancho de su contenedor */
+    overflow-x: auto; /* Agregar desplazamiento horizontal si es necesario */
+    white-space: nowrap; /* Evitar que el texto se envuelva */
+  }
+  
+  /* Estilos para pantallas pequeñas */
+  @media (max-width: 768px) {
+    .tablaAlimentos {
+      font-size: 12px; /* Reducir el tamaño de fuente */
+      /* Otros estilos según sea necesario */
+    }
+  }
+  
   
 
   
