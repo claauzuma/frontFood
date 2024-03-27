@@ -36,7 +36,7 @@ function TablaAlimentos() {
         const obtenerAlimentos = async () => {
             try {
                 console.log("Obteniendo alimentos")
-                const response = await axios.get("http://localhost:8080/api/alimentos");
+                const response = await axios.get("https://apifoods-production.up.railway.app/api/alimentos");
                 setListaAlimentos(response.data);
 
             } catch (error) {
@@ -72,7 +72,7 @@ function TablaAlimentos() {
         await handleGenerar();
         setCaloriasTotales(0)
 
-        const response = await axios.get(`http://localhost:8080/api/alimentos/distribuciones?alimento1=${alimentos[0].nombre}&alimento2=${alimentos[1].nombre}&alimento3=${alimentos[2].nombre}&alimento4=${alimentos[3].nombre}&alimento5=${alimentos[4].nombre}&alimento6=${alimentos[5].nombre}&alimento7=${alimentos[6].nombre}&proteinas=${proteinas}&carbohidratos=${carbohidratos}&grasas=${grasas}&calorias=${calorias}`);
+        const response = await axios.get(`https://apifoods-production.up.railway.app/api/alimentos/distribuciones?alimento1=${alimentos[0].nombre}&alimento2=${alimentos[1].nombre}&alimento3=${alimentos[2].nombre}&alimento4=${alimentos[3].nombre}&alimento5=${alimentos[4].nombre}&alimento6=${alimentos[5].nombre}&alimento7=${alimentos[6].nombre}&proteinas=${proteinas}&carbohidratos=${carbohidratos}&grasas=${grasas}&calorias=${calorias}`);
         console.log(response.data)
         let matrizDeAlimentos = response.data;
         console.log("Largo de la matriz final")
