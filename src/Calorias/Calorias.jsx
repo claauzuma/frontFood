@@ -1,7 +1,31 @@
-import React from 'react'
+import React, { useEffect } from 'react'
+import { useState  } from 'react';
 
 const Calorias = (props) => {
-  const { proteinas, carbohidratos, grasas, setProteinas, setCarbohidratos, setGrasas, calorias, setCalorias } = props;
+  const { proteinas, carbohidratos, grasas, setProteinas, setCarbohidratos, setGrasas, calorias, setCalorias,tipo } = props;
+
+  const [inputProte, setInputProte] = useState(false);
+  const [inputCarbo, setInputCarbo] = useState(false);
+  const [inputGrasas, setInputGrasas] = useState(false);
+
+
+  useEffect(() => {
+    // Este código se ejecuta después de que el componente ha sido renderizado en el DOM
+    setTimeout(() => {
+      console.log(grasas);
+      console.log(proteinas);
+      console.log(carbohidratos);
+    }, 10000);
+    
+  }, []); 
+
+
+
+
+
+
+
+
   return (
 
 <>
@@ -15,6 +39,23 @@ const Calorias = (props) => {
             value={proteinas}
             onChange={(e) => {
                 setProteinas(e.target.value);
+                console.log("Seteamos proteinas " + e.target.value)
+                if(tipo == "automatico") {
+                  if(e.target.value =="") {
+                    setInputProte(false)
+                    console.log("Input prote false")
+
+                  } else {
+                    setInputProte(true)
+                    console.log("Input prote true")
+
+                  }
+                 
+
+               
+
+
+                }
 
             }}
         />
@@ -27,6 +68,20 @@ const Calorias = (props) => {
             value={carbohidratos}
             onChange={(e) => {
                 setCarbohidratos(e.target.value);
+                if(tipo == "automatico") {
+                  if(e.target.value =="") {
+                    setInputCarbo(false)
+                    console.log("Input carbos false")
+
+                  } else {
+                    setInputCarbo(true)
+                    console.log("Input carbos true")
+
+                  }
+                
+
+
+                }
 
             }}
         />
@@ -39,6 +94,20 @@ const Calorias = (props) => {
             value={grasas}
             onChange={(e) => {
                 setGrasas(e.target.value);
+                if(tipo == "automatico") {
+                  if(e.target.value =="") {
+                    setInputGrasas(false)
+                    console.log("Input grasas false")
+
+                  } else {
+                    setInputGrasas(true)
+                    console.log("Input grasas true")
+
+                  }
+                
+
+
+                }
 
             }}
         />
