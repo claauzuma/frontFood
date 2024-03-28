@@ -72,7 +72,7 @@ function TablaAlimentos() {
     const handleGenerarTodo = async () => {
         await handleGenerar();
         setCaloriasTotales(0)
-        setCalorias(390); // Establecer las calorías en 390
+        setCalorias(proteinas*4+carbohidratos*4+grasas*9); // Establecer las calorías en 390
     
         // Esperar a que se configuren las calorías en 390
         await new Promise((resolve) => setTimeout(resolve, 0));
