@@ -72,10 +72,7 @@ function TablaAlimentos() {
     const handleGenerarTodo = async () => {
         await handleGenerar();
         setCaloriasTotales(0)
-        setCalorias(proteinas*4+carbohidratos*4+grasas*9); // Establecer las calorías en 390
-    
-        // Esperar a que se configuren las calorías en 390
-        await new Promise((resolve) => setTimeout(resolve, 0));
+
 
         const response = await axios.get(`https://apifoods-production.up.railway.app/api/alimentos/distribuciones?alimento1=${alimentos[0].nombre}&alimento2=${alimentos[1].nombre}&alimento3=${alimentos[2].nombre}&alimento4=${alimentos[3].nombre}&alimento5=${alimentos[4].nombre}&alimento6=${alimentos[5].nombre}&alimento7=${alimentos[6].nombre}&proteinas=${proteinas}&carbohidratos=${carbohidratos}&grasas=${grasas}&calorias=${calorias}`);
         console.log(response.data)
