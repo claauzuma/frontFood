@@ -3,8 +3,22 @@ import axios from 'axios';
 import './tablaAlimentos.css';
 import Select from 'react-select';
 import Calorias from './Calorias/Calorias';
+import Modal from 'react-modal';
+
+Modal.setAppElement('#root');
 
 function TablaAlimentos() {
+
+    const [showModal, setShowModal] = useState(false);
+
+    const handleEvent = () => {
+        // Lógica para verificar si se debe mostrar la ventana modal
+        // Aquí puedes agregar tu lógica específica
+    
+        // En este ejemplo, mostraremos la ventana modal si pasa algo
+        setShowModal(true);
+      };
+
     const [alimentos, setAlimentos] = useState([
         { nombre: "", cantidad: '', unidad: "", cantManual: '', proteinas: '', carbohidratos: '', grasas: '', calorias: '' },
         { nombre: '', cantidad: '', unidad: "", cantManual: '', proteinas: '', carbohidratos: '', grasas: '', calorias: '' },
@@ -178,14 +192,12 @@ function TablaAlimentos() {
         }
 
         setAlimentos(nuevaLista)
-
-
-
-
-
-
-
-
+        console.log("Holaaa que onda?")
+     console.log(calorias);
+     console.log(caloriasTotales);
+     if(calorias == caloriasTotales) {
+        handleEvent();
+     }
 
 
     };
@@ -317,11 +329,22 @@ function TablaAlimentos() {
                     <tr>
                         <td colSpan="7">
                             <button className='boton' onClick={handleGenerarTodo}>Generar</button>
+
                         </td>
                     </tr>
                 </tfoot>
             </table>
             <br />
+
+            <Modal
+        isOpen={showModal}
+        onRequestClose={() => setShowModal(false)}
+        contentLabel="Ejemplo de ventana modal"
+      >
+        <h2>Algo ha pasado</h2>
+        <p>¡Aquí puedes agregar el contenido de tu ventana modal!</p>
+        <button onClick={() => setShowModal(false)}>Cerrar</button>
+      </Modal>
 
         </>
     );

@@ -9,22 +9,6 @@ const Calorias = (props) => {
   const [inputGrasas, setInputGrasas] = useState(false);
 
 
-  useEffect(() => {
-    // Este código se ejecuta después de que el componente ha sido renderizado en el DOM
-    setTimeout(() => {
-      console.log(grasas);
-      console.log(proteinas);
-      console.log(carbohidratos);
-    }, 10000);
-    
-  }, []); 
-
-
-
-
-
-
-
 
   return (
 
