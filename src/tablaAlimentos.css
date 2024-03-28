@@ -143,3 +143,18 @@
     left: 0; right: 0;
 
   }
+
+  .modal-estilo {
+    position: fixed;
+    top: 50%; /* Centra verticalmente el modal */
+    left: 50%; /* Centra horizontalmente el modal */
+    transform: translate(-50%, -50%); /* Centra completamente el modal */
+    width: 60%; /* Define el ancho del modal */
+    max-height: 80%; /* Define la altura máxima del modal */
+    overflow-y: auto; /* Habilita el desplazamiento vertical si el contenido es demasiado largo */
+    background-color: #fff; /* Color de fondo del modal */
+    padding: 20px; /* Añade un relleno alrededor del contenido del modal */
+    border-radius: 8px; /* Añade bordes redondeados */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); /* Añade una sombra */
+    z-index: 1000; /* Asegura que el modal esté arriba de todo */
+}

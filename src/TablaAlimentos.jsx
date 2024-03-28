@@ -9,15 +9,29 @@ Modal.setAppElement('#root');
 
 function TablaAlimentos() {
 
+
+
     const [showModal, setShowModal] = useState(false);
 
-    const handleEvent = () => {
+    const [showModal2, setShowModal2] = useState(false);
+
+    const handleEvent = (calorias, caloriasTotales) => {
+
+        if (calorias == caloriasTotales) {
+            console.log("Las calorias son iguales")
+            setShowModal(true);
+
+        }
+        else {
+            setShowModal2(true)
+
+        }
         // Lógica para verificar si se debe mostrar la ventana modal
         // Aquí puedes agregar tu lógica específica
-    
+
         // En este ejemplo, mostraremos la ventana modal si pasa algo
-        setShowModal(true);
-      };
+
+    };
 
     const [alimentos, setAlimentos] = useState([
         { nombre: "", cantidad: '', unidad: "", cantManual: '', proteinas: '', carbohidratos: '', grasas: '', calorias: '' },
@@ -46,12 +60,16 @@ function TablaAlimentos() {
     const [caloriasTotales, setCaloriasTotales] = useState(0);
 
     const [listaAlimentos, setListaAlimentos] = useState([]);
+    const servidor = "https://apifoods-production.up.railway.app"
+    ///"https://apifoods-production.up.railway.app"
+    ///ttp://"http://localhost:8080"
+
 
     useEffect(() => {
         const obtenerAlimentos = async () => {
             try {
                 console.log("Obteniendo alimentos")
-                const response = await axios.get("https://apifoods-production.up.railway.app/api/alimentos");
+                const response = await axios.get(servidor + "/api/alimentos");
                 setListaAlimentos(response.data);
 
             } catch (error) {
@@ -88,7 +106,7 @@ function TablaAlimentos() {
         setCaloriasTotales(0)
 
 
-        const response = await axios.get(`https://apifoods-production.up.railway.app/api/alimentos/distribuciones?alimento1=${alimentos[0].nombre}&alimento2=${alimentos[1].nombre}&alimento3=${alimentos[2].nombre}&alimento4=${alimentos[3].nombre}&alimento5=${alimentos[4].nombre}&alimento6=${alimentos[5].nombre}&alimento7=${alimentos[6].nombre}&proteinas=${proteinas}&carbohidratos=${carbohidratos}&grasas=${grasas}&calorias=${calorias}`);
+        const response = await axios.get(`${servidor}/api/alimentos/distribuciones?alimento1=${alimentos[0].nombre}&alimento2=${alimentos[1].nombre}&alimento3=${alimentos[2].nombre}&alimento4=${alimentos[3].nombre}&alimento5=${alimentos[4].nombre}&alimento6=${alimentos[5].nombre}&alimento7=${alimentos[6].nombre}&proteinas=${proteinas}&carbohidratos=${carbohidratos}&grasas=${grasas}&calorias=${calorias}`);
         console.log(response.data)
         let matrizDeAlimentos = response.data;
         console.log("Largo de la matriz final")
@@ -171,33 +189,34 @@ function TablaAlimentos() {
             console.log(nuevaLista.length)
             console.log(nuevaLista)
 
-            let totalPr = 0, totalCh = 0, totalGr = 0, totalCals = 0;
-
-            nuevosAlimentos.forEach(alim => {
-                totalPr += alim.Proteinas;
-                totalCh += alim.Carbohidratos;
-                totalGr += alim.Grasas;
-                totalCals += alim.Calorias;
-
-            });
-
-            setProteinasTotales(Math.floor(totalPr))
-            setCarbohidratosTotales(Math.floor(totalCh))
-            setGrasasTotales(Math.floor(totalGr))
-            setCaloriasTotales(Math.floor(totalCals))
 
 
 
 
         }
 
+        let totalPr = 0, totalCh = 0, totalGr = 0, totalCals = 0;
+
+        nuevosAlimentos.forEach(alim => {
+            totalPr += alim.Proteinas;
+            totalCh += alim.Carbohidratos;
+            totalGr += alim.Grasas;
+            totalCals += alim.Calorias;
+
+        });
+
+        setProteinasTotales(Math.floor(totalPr))
+        setCarbohidratosTotales(Math.floor(totalCh))
+        setGrasasTotales(Math.floor(totalGr))
+        setCaloriasTotales(Math.floor(totalCals))
+
+
         setAlimentos(nuevaLista)
         console.log("Holaaa que onda?")
-     console.log(calorias);
-     console.log(totalCals);
-     if(calorias == totalCals) {
-        handleEvent();
-     }
+        console.log(calorias);
+        console.log(totalCals);
+        handleEvent(calorias, totalCals);
+
 
 
     };
@@ -222,13 +241,13 @@ function TablaAlimentos() {
     return (
         <>
 
-            <Calorias proteinas = {proteinas} carbohidratos = {carbohidratos} grasas = {grasas} setProteinas = {setProteinas}
-            setCarbohidratos =  {setCarbohidratos} setGrasas= {setGrasas} calorias = {calorias} setCalorias = {setCalorias} tipo = {"automatico"}/>
+            <Calorias proteinas={proteinas} carbohidratos={carbohidratos} grasas={grasas} setProteinas={setProteinas}
+                setCarbohidratos={setCarbohidratos} setGrasas={setGrasas} calorias={calorias} setCalorias={setCalorias} tipo={"automatico"} />
 
-            <Calorias proteinas = {proteinasTotales} carbohidratos = {carbohidratosTotales} grasas = {grasasTotales} setProteinas = {setProteinasTotales}
-            setCarbohidratos =  {setCarbohidratosTotales} setGrasas= {setGrasasTotales} calorias = {caloriasTotales} setCalorias = {setCaloriasTotales} tipo = {"normal"}/>
-      
-            <table className='tablaAlimentos' style={{ backgroundColor: 'lightblue',  border: '2px solid black'}}>
+            <Calorias proteinas={proteinasTotales} carbohidratos={carbohidratosTotales} grasas={grasasTotales} setProteinas={setProteinasTotales}
+                setCarbohidratos={setCarbohidratosTotales} setGrasas={setGrasasTotales} calorias={caloriasTotales} setCalorias={setCaloriasTotales} tipo={"normal"} />
+
+            <table className='tablaAlimentos' style={{ backgroundColor: 'lightblue', border: '2px solid black' }}>
                 <thead>
                     <tr>
                         <th>Nombre</th>
@@ -273,7 +292,7 @@ function TablaAlimentos() {
                                     onChange={e => handleChange(e, index, 'cantidad')} // Permitir la edición de cantidad
                                 />
                                 <input
-                                    style={{ fontSize: '10px' , width: '15px' }}
+                                    style={{ fontSize: '10px', width: '15px' }}
                                     className='inputImportante'
                                     type="text"
                                     value={alimento.unidad}
@@ -336,15 +355,32 @@ function TablaAlimentos() {
             </table>
             <br />
 
-            <Modal
-        isOpen={showModal}
-        onRequestClose={() => setShowModal(false)}
-        contentLabel="Ejemplo de ventana modal"
-      >
-        <h2>Algo ha pasado</h2>
-        <p>¡Aquí puedes agregar el contenido de tu ventana modal!</p>
-        <button onClick={() => setShowModal(false)}>Cerrar</button>
-      </Modal>
+
+            {showModal && (
+                <Modal
+                    isOpen={showModal}
+                    onRequestClose={() => setShowModal(false)}
+                    contentLabel="Ejemplo de ventana modal"
+                    className="modal-estilo"
+                >
+                    <h2>Las calorías están geniales</h2>
+                    <button onClick={() => setShowModal(false)}>Cerrar</button>
+                </Modal>
+            )}
+
+            {showModal2 && (
+                <Modal
+                    isOpen={showModal2}
+                    onRequestClose={() => setShowModal2(false)}
+                    contentLabel="Ejemplo de ventana modal2"
+                    className="modal-estilo"
+                >
+                    <h3>Las calorías están algo mal</h3>
+                    <button onClick={() => setShowModal2(false)}>Cerrar</button>
+                </Modal>
+            )}
+
+
 
         </>
     );
