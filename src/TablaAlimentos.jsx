@@ -194,8 +194,8 @@ function TablaAlimentos() {
         setAlimentos(nuevaLista)
         console.log("Holaaa que onda?")
      console.log(calorias);
-     console.log(caloriasTotales);
-     if(calorias == caloriasTotales) {
+     console.log(totalCals);
+     if(calorias == totalCals) {
         handleEvent();
      }
 
