@@ -43,6 +43,18 @@ function TablaAlimentos() {
         { nombre: '', cantidad: '', unidad: "", cantManual: '', proteinas: '', carbohidratos: '', grasas: '', calorias: '' }
     ]);
 
+    const eliminarAlimento = (index) => {
+        // Eliminar el alimento en el índice especificado
+        const nuevosAlimentos = [...alimentos];
+        nuevosAlimentos.splice(index, 1);
+        setAlimentos(nuevosAlimentos);
+    
+        // Limpiar el alimento seleccionado en ese índice
+        const alimentosActualizados = [...alimentos];
+        alimentosActualizados[index] = { nombre: "", cantidad: '', unidad: "", cantManual: '', proteinas: '', carbohidratos: '', grasas: '', calorias: '' };
+        setAlimentos(alimentosActualizados);
+    };
+
 
 
 
@@ -264,6 +276,7 @@ function TablaAlimentos() {
                     {alimentos.map((alimento, index) => (
                         <tr key={index}>
                             <td>
+                            
                                 <Select
                                     className='classSelect'
                                     value={{ value: alimento.nombre, label: alimento.nombre }} // Establece el valor y la etiqueta seleccionada
@@ -277,6 +290,7 @@ function TablaAlimentos() {
                                         }),
                                     }}
                                 />
+                                <button onClick={()=> eliminarAlimento(index)}>Eliminar</button>
                             </td>
 
 
