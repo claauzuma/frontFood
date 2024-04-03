@@ -16,6 +16,11 @@
       /* Otros estilos según sea necesario */
     }
   }
+
+  .css-1pahdxg-singleValue {
+    font-weight: bold; /* Texto en negrita */
+    
+  }
   
   
 
@@ -120,6 +125,32 @@
 
 .classSelect {
  background-color: antiquewhite;
+ 
+
+}
+
+.botonEliminar {
+  background-color: transparent;
+  border: none;
+  color: red;
+  cursor: pointer;
+  font-size: 16px;
+  margin-right: 5px;
+  
+}
+
+.botonEliminar:hover {
+  background-color: darkred; /* Fondo rojo oscuro al pasar el cursor */
+  color: black; /* Texto negro */
+}
+
+.botonFondo {
+  background-color: transparent;
+  border: none;
+  color: lightblue;
+  cursor: pointer;
+  font-size: 16px;
+  margin-right: 5px;
 }
 
 

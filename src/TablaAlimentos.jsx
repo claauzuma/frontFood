@@ -73,6 +73,7 @@ function TablaAlimentos() {
 
     const [listaAlimentos, setListaAlimentos] = useState([]);
     const servidor = "https://apifoods-production.up.railway.app"
+
     ///"https://apifoods-production.up.railway.app"
     ///ttp://"http://localhost:8080"
 
@@ -111,6 +112,19 @@ function TablaAlimentos() {
             });
         }
     };
+
+
+    const handleGenerarReal = async () => {
+     if( alimentos.some(alimento => alimento.cantManual !== "")) {
+         alert("Hay alimentos con cantidad manual")
+
+  
+
+
+     } else {
+        handleGenerarTodo();
+     }
+    }
 
 
     const handleGenerarTodo = async () => {
@@ -189,6 +203,7 @@ function TablaAlimentos() {
                     nuevaLista[index].grasas = parseFloat(nuevosAlimentos[i].Grasas).toFixed(1);
 
                     nuevaLista[index].calorias = Math.round(nuevosAlimentos[i].Calorias);
+                    nuevaLista[index].unidad = nuevosAlimentos[i].Unidad;
 
                     encontrado = true;
 
@@ -276,21 +291,32 @@ function TablaAlimentos() {
                     {alimentos.map((alimento, index) => (
                         <tr key={index}>
                             <td>
-                            
-                                <Select
-                                    className='classSelect'
-                                    value={{ value: alimento.nombre, label: alimento.nombre }} // Establece el valor y la etiqueta seleccionada
-                                    onChange={(selectedOption) => handleChange(selectedOption, index, 'nombre')} // Llama a la función handleChange cuando se selecciona una opción
-                                    options={listaAlimentos.map(alim => ({ value: alim.Alimentos, label: alim.Alimentos }))} // Establece las opciones disponibles
-                                    styles={{
-                                        control: (provided, state) => ({
-                                            ...provided,
-                                            minHeight: '30px', // Reducir el tamaño vertical del control
-                                            width: '200px', // Aumentar el tamaño horizontal del control
-                                        }),
-                                    }}
-                                />
-                                <button onClick={()=> eliminarAlimento(index)}>Eliminar</button>
+                                <div style={{ display: 'flex', alignItems: 'center' }}>
+                                    <button
+                                        className={alimento.nombre ? "botonEliminar" : "botonFondo"}
+                                        onClick={() => eliminarAlimento(index)}
+                                    >
+                                        X
+                                    </button>
+                                    <Select
+    className='classSelect'
+    value={{ value: alimento.nombre, label: alimento.nombre }}
+    onChange={(selectedOption) => handleChange(selectedOption, index, 'nombre')}
+    options={listaAlimentos.map(alim => ({ value: alim.Alimentos, label: alim.Alimentos }))}
+    styles={{
+        control: (provided, state) => ({
+            ...provided,
+            minHeight: '25px',
+            width: '200px',
+        }),
+        singleValue: (provided, state) => ({
+            ...provided,
+            color: 'black', // Color azul
+        
+        }),
+    }}
+/>
+                                </div>
                             </td>
 
 
@@ -361,7 +387,7 @@ function TablaAlimentos() {
                 <tfoot>
                     <tr>
                         <td colSpan="7">
-                            <button className='boton' onClick={handleGenerarTodo}>Generar</button>
+                            <button className='boton' onClick={handleGenerarReal}>Generar</button>
 
                         </td>
                     </tr>
