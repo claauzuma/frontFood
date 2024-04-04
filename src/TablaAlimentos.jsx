@@ -69,7 +69,7 @@ function TablaAlimentos() {
     const [caloriasTotales, setCaloriasTotales] = useState(0);
 
     const [listaAlimentos, setListaAlimentos] = useState([]);
-    const servidor = "https://apifoods-production.up.railway.app"
+    const servidor = "http://localhost:8080"
 
     ///"https://apifoods-production.up.railway.app"
     ///ttp://"http://localhost:8080"
@@ -372,7 +372,7 @@ function TablaAlimentos() {
 
                             <td>
                                 <div style={{ display: 'flex', alignItems: 'center' }}>
-                                <img style={{ marginRight: '5px' }} height={35} width={50}  src="src\images\pechugapollo.jpg" alt="" />
+                                <img style={{ marginRight: '5px' }} height={35} width={50}  src="./src/images/pechugapollo.jpg" alt="" />
 
                                 </div>
                             
