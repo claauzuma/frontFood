@@ -69,7 +69,7 @@ function TablaAlimentos() {
     const [caloriasTotales, setCaloriasTotales] = useState(0);
 
     const [listaAlimentos, setListaAlimentos] = useState([]);
-    const servidor = "http://localhost:8080"
+    const servidor = "https://apifoods-production.up.railway.app"
 
     ///"https://apifoods-production.up.railway.app"
     ///ttp://"http://localhost:8080"
@@ -135,7 +135,13 @@ function TablaAlimentos() {
             alert("Hay alimentos con cantidad manual")
           
         } else {
-            handleGenerarTodo();
+            if(proteinas == "" || grasas == "" || carbohidratos == "" || calorias =="") {
+              alert("Completa los campos de macronutrientes")
+            } else {
+                handleGenerarTodo();
+
+            }
+            
         }
     }
 
@@ -217,6 +223,11 @@ function TablaAlimentos() {
         console.log(nuevosAlimentos)
         console.log("Cantidad de los nuevos alimentos")
         console.log(nuevosAlimentos.length)
+
+
+
+
+        
 
         let nuevaLista = [{ nombre: "", cantidad: '', unidad: "", cantManual: '', proteinas: '', carbohidratos: '', grasas: '', calorias: '' },
         { nombre: '', cantidad: '', unidad: "", cantManual: '', proteinas: '', carbohidratos: '', grasas: '', calorias: '' },
@@ -325,7 +336,6 @@ function TablaAlimentos() {
                 <thead>
                     <tr>
                         <th>Nombre</th>
-                        <th className='letras th-letras'></th>
                         <th className='letras th-letras'>Cant</th>
                         <th className='letras th-letras'>CantManual</th>
                         <th className='letras th-letras'>Calorias</th>
@@ -370,14 +380,6 @@ function TablaAlimentos() {
                             </td>
                             
 
-                            <td>
-                                <div style={{ display: 'flex', alignItems: 'center' }}>
-                                <img style={{ marginRight: '5px' }} height={35} width={50}  src="./src/images/pechugapollo.jpg" alt="" />
-
-                                </div>
-                            
-
-                            </td>
                             
                             <td>
                                 <input
