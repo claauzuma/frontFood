@@ -34,13 +34,7 @@ function TablaAlimentos() {
     };
 
     const [alimentos, setAlimentos] = useState([
-        { nombre: "", cantidad: '', unidad: "", cantManual: '', proteinas: '', carbohidratos: '', grasas: '', calorias: '' },
-        { nombre: '', cantidad: '', unidad: "", cantManual: '', proteinas: '', carbohidratos: '', grasas: '', calorias: '' },
-        { nombre: '', cantidad: '', unidad: "", cantManual: '', proteinas: '', carbohidratos: '', grasas: '', calorias: '' },
-        { nombre: '', cantidad: '', unidad: "", cantManual: '', proteinas: '', carbohidratos: '', grasas: '', calorias: '' },
-        { nombre: '', cantidad: '', unidad: "", cantManual: '', proteinas: '', carbohidratos: '', grasas: '', calorias: '' },
-        { nombre: '', cantidad: '', unidad: "", cantManual: '', proteinas: '', carbohidratos: '', grasas: '', calorias: '' },
-        { nombre: '', cantidad: '', unidad: "", cantManual: '', proteinas: '', carbohidratos: '', grasas: '', calorias: '' }
+        { nombre: "", cantidad: '', unidad: "", cantManual: '', proteinas: '', carbohidratos: '', grasas: '', calorias: '' }
     ]);
 
     const eliminarAlimento = (index) => {
@@ -48,18 +42,21 @@ function TablaAlimentos() {
         const nuevosAlimentos = [...alimentos];
         nuevosAlimentos.splice(index, 1);
         setAlimentos(nuevosAlimentos);
-    
+
         // Limpiar el alimento seleccionado en ese índice
         const alimentosActualizados = [...alimentos];
         alimentosActualizados[index] = { nombre: "", cantidad: '', unidad: "", cantManual: '', proteinas: '', carbohidratos: '', grasas: '', calorias: '' };
         setAlimentos(alimentosActualizados);
     };
 
+    const agregarNuevoAlimento = () => {
+        setAlimentos(prevAlimentos => [
+            ...prevAlimentos,
+            { nombre: "", cantidad: '', unidad: "", cantManual: '', proteinas: '', carbohidratos: '', grasas: '', calorias: '' }
+        ]);
+    };
 
 
-
-    const [alimento1, setAlimento1] = useState({ nombre: '', cantidad: '', cantManual: '', proteinas: '', carbohidratos: '', grasas: '', calorias: '' }
-    );
 
     const [proteinas, setProteinas] = useState('');
     const [carbohidratos, setCarbohidratos] = useState('');
@@ -72,7 +69,7 @@ function TablaAlimentos() {
     const [caloriasTotales, setCaloriasTotales] = useState(0);
 
     const [listaAlimentos, setListaAlimentos] = useState([]);
-    const servidor = "https://apifoods-production.up.railway.app"
+    const servidor = "http://localhost:8080"
 
     ///"https://apifoods-production.up.railway.app"
     ///ttp://"http://localhost:8080"
@@ -93,6 +90,25 @@ function TablaAlimentos() {
         obtenerAlimentos();
     }, []);
 
+
+    const handleGenerarCompleto = (selectedOption, index, campo) => {
+    handleChange(selectedOption,index,campo)
+    if(alimentos.length < 7) {
+        console.log(index)
+        console.log(alimentos[index].nombre)
+        console.log(alimentos[index+1])
+ 
+        if(alimentos[index+1] === undefined) {
+            console.log("Es undefined asi que agregamos el alimento")
+            agregarNuevoAlimento();
+        }
+        
+
+    }
+  
+
+
+    }
 
     const handleChange = (selectedOption, index, campo) => {
         setAlimentos(prevAlimentos => {
@@ -115,15 +131,12 @@ function TablaAlimentos() {
 
 
     const handleGenerarReal = async () => {
-     if( alimentos.some(alimento => alimento.cantManual !== "")) {
-         alert("Hay alimentos con cantidad manual")
-
-  
-
-
-     } else {
-        handleGenerarTodo();
-     }
+        if (alimentos.some(alimento => alimento.cantManual > 0)) {
+            alert("Hay alimentos con cantidad manual")
+          
+        } else {
+            handleGenerarTodo();
+        }
     }
 
 
@@ -131,8 +144,37 @@ function TablaAlimentos() {
         await handleGenerar();
         setCaloriasTotales(0)
 
+        let nombreAlim1 ="";
+        let nombreAlim2 ="";
+        let nombreAlim3 ="";
+        let nombreAlim4 ="";
+        let nombreAlim5 ="";
+        let nombreAlim6 ="";
+        let nombreAlim7 ="";
 
-        const response = await axios.get(`${servidor}/api/alimentos/distribuciones?alimento1=${alimentos[0].nombre}&alimento2=${alimentos[1].nombre}&alimento3=${alimentos[2].nombre}&alimento4=${alimentos[3].nombre}&alimento5=${alimentos[4].nombre}&alimento6=${alimentos[5].nombre}&alimento7=${alimentos[6].nombre}&proteinas=${proteinas}&carbohidratos=${carbohidratos}&grasas=${grasas}&calorias=${calorias}`);
+        if(alimentos[1].nombre != "undefined") {
+             nombreAlim2 = alimentos[1].nombre;
+        }
+        if(alimentos[2].nombre != "undefined") {
+             nombreAlim3 = alimentos[2].nombre;
+        }
+        if(alimentos[3].nombre != "undefined") {
+            nombreAlim4 = alimentos[3].nombre;
+        }
+
+        if (alimentos[4] && alimentos[4].nombre !== undefined) {
+            nombreAlim5 = alimentos[4].nombre;
+        }
+        if (alimentos[5] && alimentos[5].nombre !== undefined) {
+            nombreAlim6 = alimentos[5].nombre;
+        }
+        
+        if (alimentos[6] && alimentos[6].nombre !== undefined) {
+            nombreAlim7 = alimentos[6].nombre;
+        }
+
+
+        const response = await axios.get(`${servidor}/api/alimentos/distribuciones?alimento1=${alimentos[0].nombre}&alimento2=${nombreAlim2}&alimento3=${nombreAlim3}&alimento4=${nombreAlim4}&alimento5=${nombreAlim5}&alimento6=${nombreAlim6}&alimento7=${nombreAlim7}&proteinas=${proteinas}&carbohidratos=${carbohidratos}&grasas=${grasas}&calorias=${calorias}`);
         console.log(response.data)
         let matrizDeAlimentos = response.data;
         console.log("Largo de la matriz final")
@@ -248,6 +290,11 @@ function TablaAlimentos() {
 
     };
 
+    const handleSeleccionarAlimento = (selectedOption) => {
+        handleChange(selectedOption, index, 'nombre');
+        agregarAlimento(selectedOption);
+    };
+
 
 
 
@@ -278,52 +325,60 @@ function TablaAlimentos() {
                 <thead>
                     <tr>
                         <th>Nombre</th>
+                        <th className='letras th-letras'></th>
                         <th className='letras th-letras'>Cant</th>
                         <th className='letras th-letras'>CantManual</th>
-
-                        <th className='letras th-letras'>Pr</th>
-                        <th className='letras th-letras'>Ch</th>
-                        <th className='letras th-letras'>Grasas</th>
-                        <th className='letras th-letras'>Cals</th>
+                        <th className='letras th-letras'>Calorias</th>
+                   
                     </tr>
                 </thead>
                 <tbody>
+               
                     {alimentos.map((alimento, index) => (
                         <tr key={index}>
                             <td>
                                 <div style={{ display: 'flex', alignItems: 'center' }}>
+                                    
                                     <button
                                         className={alimento.nombre ? "botonEliminar" : "botonFondo"}
                                         onClick={() => eliminarAlimento(index)}
                                     >
                                         X
                                     </button>
+
+                                   
+
                                     <Select
-    className='classSelect'
-    value={{ value: alimento.nombre, label: alimento.nombre }}
-    onChange={(selectedOption) => handleChange(selectedOption, index, 'nombre')}
-    options={listaAlimentos.map(alim => ({ value: alim.Alimentos, label: alim.Alimentos }))}
-    styles={{
-        control: (provided, state) => ({
-            ...provided,
-            minHeight: '25px',
-            width: '200px',
-        }),
-        singleValue: (provided, state) => ({
-            ...provided,
-            color: 'black', // Color azul
-        
-        }),
-    }}
-/>
+                                        className='classSelect'
+                                        value={{ value: alimento.nombre, label: alimento.nombre }}
+                                        onChange={(selectedOption) => handleGenerarCompleto(selectedOption, index, 'nombre')}
+                                        options={listaAlimentos.map(alim => ({ value: alim.Alimentos, label: alim.Alimentos }))}
+                                        styles={{
+                                            control: (provided, state) => ({
+                                                ...provided,
+                                                minHeight: '25px',
+                                                width: '200px',
+                                            }),
+                                            singleValue: (provided, state) => ({
+                                                ...provided,
+                                                color: 'black', // Color azul
+
+                                            }),
+                                        }}
+                                    />
                                 </div>
                             </td>
+                            
 
+                            <td>
+                                <div style={{ display: 'flex', alignItems: 'center' }}>
+                                <img style={{ marginRight: '5px' }} height={35} width={50}  src="src\images\pechugapollo.jpg" alt="" />
 
+                                </div>
+                            
 
-
-
-
+                            </td>
+                            
                             <td>
                                 <input
                                     className='inputImportante'
@@ -332,7 +387,7 @@ function TablaAlimentos() {
                                     onChange={e => handleChange(e, index, 'cantidad')} // Permitir la edición de cantidad
                                 />
                                 <input
-                                    style={{ fontSize: '10px', width: '15px' }}
+                                    style={{ fontSize: '10px', width: '18px' }}
                                     className='inputImportante'
                                     type="text"
                                     value={alimento.unidad}
@@ -349,30 +404,6 @@ function TablaAlimentos() {
                                 />
                             </td>
 
-                            <td>
-                                <input
-                                    className='inputNumerico'
-                                    type="text"
-                                    value={alimento.proteinas}
-                                    onChange={e => handleChange(e, index, 'proteinas')} // Permitir la edición de proteínas
-                                />
-                            </td>
-                            <td>
-                                <input
-                                    className='inputNumerico'
-                                    type="text"
-                                    value={alimento.carbohidratos}
-                                    onChange={e => handleChange(e, index, 'carbohidratos')} // Permitir la edición de carbohidratos
-                                />
-                            </td>
-                            <td>
-                                <input
-                                    className='inputNumerico'
-                                    type="text"
-                                    value={alimento.grasas}
-                                    onChange={e => handleChange(e, index, 'grasas')} // Permitir la edición de grasas
-                                />
-                            </td>
                             <td>
                                 <input
                                     className='inputNumerico'

@@ -99,8 +99,8 @@
   text-align: center; /* Alineación del texto */
   text-decoration: none; /* Sin subrayado */
   display: inline-block; /* Mostrar como elemento en línea */
-  font-size: 20px; /* Tamaño de la fuente */
-  margin: 6px 200px; /* Margen exterior */
+  font-size: 15px; /* Tamaño de la fuente */
+  margin: 6px 100px; /* Margen exterior */
   transition-duration: 0.4s; /* Duración de la transición */
   cursor: pointer; /* Cambiar el cursor al pasar por encima */
 
