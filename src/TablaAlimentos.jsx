@@ -138,7 +138,14 @@ function TablaAlimentos() {
             if(proteinas == "" || grasas == "" || carbohidratos == "" || calorias =="") {
               alert("Completa los campos de macronutrientes")
             } else {
-                handleGenerarTodo();
+                if(alimentos.length > 1) {
+                    handleGenerarTodo();
+
+                }
+                else {
+                    alert("Elegi al menos un alimento")
+                }
+                
 
             }
             
