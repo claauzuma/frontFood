@@ -157,7 +157,7 @@ function TablaAlimentos() {
             if(proteinas == "" || grasas == "" || carbohidratos == "" || calorias =="") {
               alert("Completa los campos de macronutrientes")
             } else {
-                if(alimentos.length > 1) {
+                if(alimentos.some(alimento => alimento.nombre !=="")) {
                     handleGenerarTodo();
 
                 }
