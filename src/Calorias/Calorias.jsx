@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react'
 import { useState  } from 'react';
 
+
 const Calorias = (props) => {
   const { proteinas, carbohidratos, grasas, setProteinas, setCarbohidratos, setGrasas, calorias, setCalorias,tipo } = props;
 

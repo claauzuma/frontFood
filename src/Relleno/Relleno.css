@@ -1,0 +1,19 @@
+.titulo {
+ 
+    margin-right: 15px; /* Agrega un margen a la derecha del título */
+}
+
+.cuadro {
+    display: flex;
+    align-items: center; /* Centra verticalmente los elementos dentro de .cuadro */
+    justify-content: center; /* Centra horizontalmente los elementos dentro de .cuadro */
+}
+
+.botonCuadro {
+    background-color: red;
+    height: 30px;
+    width: 70px;
+    margin-left: 10px; /* Margen izquierdo automático, lo que empujará el botón hacia la derecha */
+
+
+}

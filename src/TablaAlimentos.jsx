@@ -4,6 +4,7 @@ import './tablaAlimentos.css';
 import Select from 'react-select';
 import Calorias from './Calorias/Calorias';
 import Modal from 'react-modal';
+import Relleno from './Relleno/Relleno';
 
 Modal.setAppElement('#root');
 
@@ -14,18 +15,34 @@ function TablaAlimentos() {
     const [showModal, setShowModal] = useState(false);
 
     const [showModal2, setShowModal2] = useState(false);
+    const [showExcedenCaloriasFaltanProtes, setExcedenCaloriasFaltanProtes] = useState(false);
+    const [showExcedenCaloriasFaltanCarbos, setExcedenCaloriasFaltanCarbos] = useState(false);
+    const [showExcedenCaloriasFaltanGrasas, setExcedenCaloriasFaltanGrasas] = useState(false);
+    const [showFaltanProteinas, setFaltanProteinas] = useState(false);
+    const [showFaltanCarbohidratos, setFaltanCarbohidratos] = useState(false);
+    const [showFaltanGrasas, setFaltanGrasas] = useState(false);
+   
 
-    const handleEvent = (calorias, caloriasTotales) => {
 
-        if (calorias == caloriasTotales) {
-            console.log("Las calorias son iguales")
-            setShowModal(true);
+    const handleEvent = (calorias, caloriasTotales,proteinas,prTotales,ch,chTotales,gr,grasasTotales) => {
+        console.log("Las calorias son" + calorias)
+        console.log("Las calorias son" + caloriasTotales)
+        console.log(calorias-caloriasTotales)
+        let diferenciaCalorica = caloriasTotales - calorias
+        let diferenciaProteica =  proteinas - prTotales
+        let diferenciaCarbos = ch - chTotales
+        let diferenciaGrasas = gr - grasasTotales
 
-        }
-        else {
+        console.log("La diferencia calorica es de " + diferenciaCalorica)
+        console.log(diferenciaCalorica > 10)
+
+        if (diferenciaCalorica > 10) {
+            
+            console.log("Las calorias estan mal")
             setShowModal2(true)
 
         }
+    
         // Lógica para verificar si se debe mostrar la ventana modal
         // Aquí puedes agregar tu lógica específica
 
@@ -304,16 +321,13 @@ function TablaAlimentos() {
         console.log("Holaaa que onda?")
         console.log(calorias);
         console.log(totalCals);
-        handleEvent(calorias, totalCals);
+        handleEvent(calorias, totalCals, proteinas,totalPr, carbohidratos,totalCh,grasas,totalGr);
 
 
 
     };
 
-    const handleSeleccionarAlimento = (selectedOption) => {
-        handleChange(selectedOption, index, 'nombre');
-        agregarAlimento(selectedOption);
-    };
+
 
 
 
@@ -335,11 +349,14 @@ function TablaAlimentos() {
     return (
         <>
 
+
             <Calorias proteinas={proteinas} carbohidratos={carbohidratos} grasas={grasas} setProteinas={setProteinas}
                 setCarbohidratos={setCarbohidratos} setGrasas={setGrasas} calorias={calorias} setCalorias={setCalorias} tipo={"automatico"} />
 
             <Calorias proteinas={proteinasTotales} carbohidratos={carbohidratosTotales} grasas={grasasTotales} setProteinas={setProteinasTotales}
                 setCarbohidratos={setCarbohidratosTotales} setGrasas={setGrasasTotales} calorias={caloriasTotales} setCalorias={setCaloriasTotales} tipo={"normal"} />
+              
+              <Relleno/>
 
             <table className='tablaAlimentos' style={{ backgroundColor: '#FAD7A0  ', border: '2px solid black' }}>
                 <thead>
