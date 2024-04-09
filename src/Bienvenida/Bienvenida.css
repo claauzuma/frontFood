@@ -1,6 +1,10 @@
 .welcome1 {
-    color:  red;
+    color: #B03A2E;
     font-family: 'Courier New', Courier, monospace;
     text-align: center;
-    font-size:xx-large
+    font-size:xx-large;
+    width: 300px;
+    margin-left: 30%;
+    height: 40px;
+    padding: 5px;
 }

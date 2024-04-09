@@ -6,17 +6,24 @@ import Bienvenida from './Bienvenida/Bienvenida.jsx';
 function App() {
   const [count, setCount] = useState(0);
 
-  let cantidad = 2;
+  let cantidad = 1;
 
   // Creamos un array de 5 elementos, donde cada elemento es un componente <TablaAlimentos />
   const tablas = Array.from({ length: cantidad }, (_, index) => <TablaAlimentos key={index} />);
 
   return (
     <>
-      <Bienvenida />
+
+<div style={{ backgroundColor: '#ABEBC6', border: '2px solid black' }}>
+
+
+    <Bienvenida />
       {/* Renderizamos el array de componentes */}
       <br />
       {tablas}
+
+    </div>
+
     </>
   );
 }

@@ -34,7 +34,13 @@ function TablaAlimentos() {
     };
 
     const [alimentos, setAlimentos] = useState([
-        { nombre: "", cantidad: '', unidad: "", cantManual: '', proteinas: '', carbohidratos: '', grasas: '', calorias: '' }
+        { nombre: "", cantidad: '', unidad: "", cantManual: '', proteinas: '', carbohidratos: '', grasas: '', calorias: '' },
+        { nombre: '', cantidad: '', unidad: "", cantManual: '', proteinas: '', carbohidratos: '', grasas: '', calorias: '' },
+        { nombre: '', cantidad: '', unidad: "", cantManual: '', proteinas: '', carbohidratos: '', grasas: '', calorias: '' },
+        { nombre: '', cantidad: '', unidad: "", cantManual: '', proteinas: '', carbohidratos: '', grasas: '', calorias: '' },
+        { nombre: '', cantidad: '', unidad: "", cantManual: '', proteinas: '', carbohidratos: '', grasas: '', calorias: '' },
+        { nombre: '', cantidad: '', unidad: "", cantManual: '', proteinas: '', carbohidratos: '', grasas: '', calorias: '' },
+        { nombre: '', cantidad: '', unidad: "", cantManual: '', proteinas: '', carbohidratos: '', grasas: '', calorias: '' }
     ]);
 
     const eliminarAlimento = (index) => {
@@ -69,7 +75,7 @@ function TablaAlimentos() {
     const [caloriasTotales, setCaloriasTotales] = useState(0);
 
     const [listaAlimentos, setListaAlimentos] = useState([]);
-    const servidor = "https://apifoods-production.up.railway.app"
+    const servidor = "http://localhost:8080"
 
     ///"https://apifoods-production.up.railway.app"
     ///ttp://"http://localhost:8080"
@@ -118,6 +124,16 @@ function TablaAlimentos() {
         });
     };
 
+    const handleChange2 = (e, index, campo) => {
+        const { value } = e.target; // Obtener el valor del input
+        
+        setAlimentos(prevAlimentos => {
+            const nuevosAlimentos = [...prevAlimentos];
+            nuevosAlimentos[index][campo] = value; // Asignar el valor del input al campo especificado
+            return nuevosAlimentos;
+        });
+    };
+
     const handleKeyDown = (e, index) => {
         if (e.key === 'Delete') {
             // Eliminar el elemento seleccionado
@@ -131,6 +147,9 @@ function TablaAlimentos() {
 
 
     const handleGenerarReal = async () => {
+        console.log("La cantidad manual es " + alimentos[0].cantManual)
+        console.log("La cantidad manual es " + alimentos[1].cantManual)
+        console.log("La cantidad manual es " + alimentos[2].cantManual)
         if (alimentos.some(alimento => alimento.cantManual > 0)) {
             alert("Hay alimentos con cantidad manual")
           
@@ -339,12 +358,12 @@ function TablaAlimentos() {
             <Calorias proteinas={proteinasTotales} carbohidratos={carbohidratosTotales} grasas={grasasTotales} setProteinas={setProteinasTotales}
                 setCarbohidratos={setCarbohidratosTotales} setGrasas={setGrasasTotales} calorias={caloriasTotales} setCalorias={setCaloriasTotales} tipo={"normal"} />
 
-            <table className='tablaAlimentos' style={{ backgroundColor: 'lightblue', border: '2px solid black' }}>
+            <table className='tablaAlimentos' style={{ backgroundColor: '#FAD7A0  ', border: '2px solid black' }}>
                 <thead>
                     <tr>
                         <th>Nombre</th>
                         <th className='letras th-letras'>Cant</th>
-                        <th className='letras th-letras'>CantManual</th>
+                        <th className='letras th-letras'>Manual</th>
                         <th className='letras th-letras'>Calorias</th>
                    
                     </tr>
@@ -409,7 +428,7 @@ function TablaAlimentos() {
                                     className='inputNumerico'
                                     type="text"
                                     value={alimento.cantManual}
-                                    onChange={e => handleChange(e, index, 'cantManual')} // Permitir la edición de cantidad
+                                    onChange={e => handleChange2(e, index, 'cantManual')} // Permitir la edición de cantidad
                                 />
                             </td>
 
