@@ -75,7 +75,7 @@ function TablaAlimentos() {
     const [caloriasTotales, setCaloriasTotales] = useState(0);
 
     const [listaAlimentos, setListaAlimentos] = useState([]);
-    const servidor = "https://apifoods-production.up.railway.app"
+    const servidor = "http://localhost:8080"
 
     ///"https://apifoods-production.up.railway.app"
     ///ttp://"http://localhost:8080"
@@ -97,24 +97,7 @@ function TablaAlimentos() {
     }, []);
 
 
-    const handleGenerarCompleto = (selectedOption, index, campo) => {
-    handleChange(selectedOption,index,campo)
-    if(alimentos.length < 7) {
-        console.log(index)
-        console.log(alimentos[index].nombre)
-        console.log(alimentos[index+1])
- 
-        if(alimentos[index+1] === undefined) {
-            console.log("Es undefined asi que agregamos el alimento")
-            agregarNuevoAlimento();
-        }
-        
 
-    }
-  
-
-
-    }
 
     const handleChange = (selectedOption, index, campo) => {
         setAlimentos(prevAlimentos => {
@@ -126,7 +109,7 @@ function TablaAlimentos() {
 
     const handleChange2 = (e, index, campo) => {
         const { value } = e.target; // Obtener el valor del input
-        
+
         setAlimentos(prevAlimentos => {
             const nuevosAlimentos = [...prevAlimentos];
             nuevosAlimentos[index][campo] = value; // Asignar el valor del input al campo especificado
@@ -152,22 +135,22 @@ function TablaAlimentos() {
         console.log("La cantidad manual es " + alimentos[2].cantManual)
         if (alimentos.some(alimento => alimento.cantManual > 0)) {
             alert("Hay alimentos con cantidad manual")
-          
+
         } else {
-            if(proteinas == "" || grasas == "" || carbohidratos == "" || calorias =="") {
-              alert("Completa los campos de macronutrientes")
+            if (proteinas == "" || grasas == "" || carbohidratos == "" || calorias == "") {
+                alert("Completa los campos de macronutrientes")
             } else {
-                if(alimentos.some(alimento => alimento.nombre !=="")) {
+                if (alimentos.some(alimento => alimento.nombre !== "")) {
                     handleGenerarTodo();
 
                 }
                 else {
                     alert("Elegi al menos un alimento")
                 }
-                
+
 
             }
-            
+
         }
     }
 
@@ -176,21 +159,21 @@ function TablaAlimentos() {
         await handleGenerar();
         setCaloriasTotales(0)
 
-        let nombreAlim1 ="";
-        let nombreAlim2 ="";
-        let nombreAlim3 ="";
-        let nombreAlim4 ="";
-        let nombreAlim5 ="";
-        let nombreAlim6 ="";
-        let nombreAlim7 ="";
+        let nombreAlim1 = "";
+        let nombreAlim2 = "";
+        let nombreAlim3 = "";
+        let nombreAlim4 = "";
+        let nombreAlim5 = "";
+        let nombreAlim6 = "";
+        let nombreAlim7 = "";
 
-        if(alimentos[1].nombre != "undefined") {
-             nombreAlim2 = alimentos[1].nombre;
+        if (alimentos[1].nombre != "undefined") {
+            nombreAlim2 = alimentos[1].nombre;
         }
-        if(alimentos[2].nombre != "undefined") {
-             nombreAlim3 = alimentos[2].nombre;
+        if (alimentos[2].nombre != "undefined") {
+            nombreAlim3 = alimentos[2].nombre;
         }
-        if(alimentos[3].nombre != "undefined") {
+        if (alimentos[3].nombre != "undefined") {
             nombreAlim4 = alimentos[3].nombre;
         }
 
@@ -200,7 +183,7 @@ function TablaAlimentos() {
         if (alimentos[5] && alimentos[5].nombre !== undefined) {
             nombreAlim6 = alimentos[5].nombre;
         }
-        
+
         if (alimentos[6] && alimentos[6].nombre !== undefined) {
             nombreAlim7 = alimentos[6].nombre;
         }
@@ -253,7 +236,7 @@ function TablaAlimentos() {
 
 
 
-        
+
 
         let nuevaLista = [{ nombre: "", cantidad: '', unidad: "", cantManual: '', proteinas: '', carbohidratos: '', grasas: '', calorias: '' },
         { nombre: '', cantidad: '', unidad: "", cantManual: '', proteinas: '', carbohidratos: '', grasas: '', calorias: '' },
@@ -365,16 +348,16 @@ function TablaAlimentos() {
                         <th className='letras th-letras'>Cant</th>
                         <th className='letras th-letras'>Manual</th>
                         <th className='letras th-letras'>Calorias</th>
-                   
+
                     </tr>
                 </thead>
                 <tbody>
-               
+
                     {alimentos.map((alimento, index) => (
                         <tr key={index}>
                             <td>
                                 <div style={{ display: 'flex', alignItems: 'center' }}>
-                                    
+
                                     <button
                                         className={alimento.nombre ? "botonEliminar" : "botonFondo"}
                                         onClick={() => eliminarAlimento(index)}
@@ -382,12 +365,19 @@ function TablaAlimentos() {
                                         X
                                     </button>
 
-                                   
 
                                     <Select
                                         className='classSelect'
                                         value={{ value: alimento.nombre, label: alimento.nombre }}
-                                        onChange={(selectedOption) => handleGenerarCompleto(selectedOption, index, 'nombre')}
+                                        onChange={(selectedOption) => {
+                                            // Verificar si el alimento seleccionado ya existe en el estado alimentos
+                                            if (!alimentos.some(item => item.nombre === selectedOption.value)) {
+                                                handleChange(selectedOption, index, 'nombre');
+                                            } else {
+                                                // Si el alimento ya existe, mostrar alerta
+                                                alert("Este alimento ya está seleccionado");
+                                            }
+                                        }}
                                         options={listaAlimentos.map(alim => ({ value: alim.Alimentos, label: alim.Alimentos }))}
                                         styles={{
                                             control: (provided, state) => ({
@@ -398,15 +388,16 @@ function TablaAlimentos() {
                                             singleValue: (provided, state) => ({
                                                 ...provided,
                                                 color: 'black', // Color azul
-
                                             }),
                                         }}
                                     />
+                                    {/* Resto del código... */}
+      
                                 </div>
                             </td>
-                            
 
-                            
+
+
                             <td>
                                 <input
                                     className='inputImportante'
