@@ -480,7 +480,7 @@ function TablaAlimentos() {
                                                     }),
                                                 }}
                                             />
-                                          <img src="../public/images/pechugapollo.jpg" alt="" />
+                                          <img src="/images/pechugapollo.jpg" alt="" />
                                             <div className="botones-container">
                                                 <button style={{ backgroundColor: '#EDBB99' }} onClick={() => obtenerAleatorioProte(index)}>PR</button>
                                                 <button style={{ backgroundColor: '#ABB2B9' }} onClick={() => obtenerAleatorioCarbo(index)}>CH</button>
