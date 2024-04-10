@@ -189,3 +189,14 @@
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); /* Añade una sombra */
     z-index: 1000; /* Asegura que el modal esté arriba de todo */
 }
+
+.botones-container {
+  display: flex;
+  gap: 3px; /* Reducir la separación entre botones */
+  margin-top: 1px; /* Agregar un pequeño margen superior */
+}
+
+.botones-container button {
+  padding: 3px 8px; /* Ajustar el padding para cambiar el tamaño de los botones */
+  font-size: 7px; /* Tamaño del texto */
+}

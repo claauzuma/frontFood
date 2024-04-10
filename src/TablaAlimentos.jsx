@@ -10,26 +10,24 @@ Modal.setAppElement('#root');
 
 function TablaAlimentos() {
 
-
-
-    const [showModal, setShowModal] = useState(false);
-
-    const [showModal2, setShowModal2] = useState(false);
+    const [showExedenteCalorias, setExedenteCalorias] = useState(false);
     const [showExcedenCaloriasFaltanProtes, setExcedenCaloriasFaltanProtes] = useState(false);
     const [showExcedenCaloriasFaltanCarbos, setExcedenCaloriasFaltanCarbos] = useState(false);
     const [showExcedenCaloriasFaltanGrasas, setExcedenCaloriasFaltanGrasas] = useState(false);
     const [showFaltanProteinas, setFaltanProteinas] = useState(false);
     const [showFaltanCarbohidratos, setFaltanCarbohidratos] = useState(false);
     const [showFaltanGrasas, setFaltanGrasas] = useState(false);
-   
 
 
-    const handleEvent = (calorias, caloriasTotales,proteinas,prTotales,ch,chTotales,gr,grasasTotales) => {
+
+    const handleEvent = (calorias, caloriasTotales, proteinas, prTotales, ch, chTotales, gr, grasasTotales) => {
         console.log("Las calorias son" + calorias)
         console.log("Las calorias son" + caloriasTotales)
-        console.log(calorias-caloriasTotales)
+        console.log("Las proteinas son" + proteinas)
+        console.log("Las proteinas totales son" + prTotales)
+        console.log(calorias - caloriasTotales)
         let diferenciaCalorica = caloriasTotales - calorias
-        let diferenciaProteica =  proteinas - prTotales
+        let diferenciaProteica = proteinas - prTotales
         let diferenciaCarbos = ch - chTotales
         let diferenciaGrasas = gr - grasasTotales
 
@@ -37,12 +35,35 @@ function TablaAlimentos() {
         console.log(diferenciaCalorica > 10)
 
         if (diferenciaCalorica > 10) {
-            
+
             console.log("Las calorias estan mal")
-            setShowModal2(true)
+            setExedenteCalorias(true)
 
         }
-    
+
+        else if ((prTotales + 10) < proteinas) {
+
+            setFaltanProteinas(true)
+
+        }
+
+        else if ((grasasTotales + 10) < gr) {
+  
+            setFaltanGrasas(true)
+
+        }
+
+        
+        else if ((chTotales + 10) < ch) {
+     
+            setFaltanCarbohidratos(true)
+
+        }
+
+
+
+
+
         // Lógica para verificar si se debe mostrar la ventana modal
         // Aquí puedes agregar tu lógica específica
 
@@ -321,7 +342,7 @@ function TablaAlimentos() {
         console.log("Holaaa que onda?")
         console.log(calorias);
         console.log(totalCals);
-        handleEvent(calorias, totalCals, proteinas,totalPr, carbohidratos,totalCh,grasas,totalGr);
+        handleEvent(calorias, totalCals, proteinas, totalPr, carbohidratos, totalCh, grasas, totalGr);
 
 
 
@@ -355,8 +376,8 @@ function TablaAlimentos() {
 
             <Calorias proteinas={proteinasTotales} carbohidratos={carbohidratosTotales} grasas={grasasTotales} setProteinas={setProteinasTotales}
                 setCarbohidratos={setCarbohidratosTotales} setGrasas={setGrasasTotales} calorias={caloriasTotales} setCalorias={setCaloriasTotales} tipo={"normal"} />
-              
-              <Relleno/>
+
+            <Relleno />
 
             <table className='tablaAlimentos' style={{ backgroundColor: '#FAD7A0  ', border: '2px solid black' }}>
                 <thead>
@@ -381,35 +402,44 @@ function TablaAlimentos() {
                                     >
                                         X
                                     </button>
+                                    <div className='cuadro'>
+                                        <div>
+                                            <Select
+                                                className='classSelect'
+                                                value={{ value: alimento.nombre, label: alimento.nombre }}
+                                                onChange={(selectedOption) => {
+                                                    // Verificar si el alimento seleccionado ya existe en el estado alimentos
+                                                    if (!alimentos.some(item => item.nombre === selectedOption.value)) {
+                                                        handleChange(selectedOption, index, 'nombre');
+                                                    } else {
+                                                        // Si el alimento ya existe, mostrar alerta
+                                                        alert("Este alimento ya está seleccionado");
+                                                    }
+                                                }}
+                                                options={listaAlimentos.map(alim => ({ value: alim.Alimentos, label: alim.Alimentos }))}
+                                                styles={{
+                                                    control: (provided, state) => ({
+                                                        ...provided,
+                                                        minHeight: '25px',
+                                                        width: '200px',
+                                                    }),
+                                                    singleValue: (provided, state) => ({
+                                                        ...provided,
+                                                        color: 'black', // Color azul
+                                                    }),
+                                                }}
+                                            />
+                                            <div className="botones-container">
+                                                <button style={{ backgroundColor: '#EDBB99' }}>PR</button>
+                                                <button style={{ backgroundColor: '#ABB2B9' }}>CH</button>
+                                                <button style={{ backgroundColor: '#F5B7B1' }}>GR</button>
+                                            </div>
+                                        </div>
 
+                                    </div>
 
-                                    <Select
-                                        className='classSelect'
-                                        value={{ value: alimento.nombre, label: alimento.nombre }}
-                                        onChange={(selectedOption) => {
-                                            // Verificar si el alimento seleccionado ya existe en el estado alimentos
-                                            if (!alimentos.some(item => item.nombre === selectedOption.value)) {
-                                                handleChange(selectedOption, index, 'nombre');
-                                            } else {
-                                                // Si el alimento ya existe, mostrar alerta
-                                                alert("Este alimento ya está seleccionado");
-                                            }
-                                        }}
-                                        options={listaAlimentos.map(alim => ({ value: alim.Alimentos, label: alim.Alimentos }))}
-                                        styles={{
-                                            control: (provided, state) => ({
-                                                ...provided,
-                                                minHeight: '25px',
-                                                width: '200px',
-                                            }),
-                                            singleValue: (provided, state) => ({
-                                                ...provided,
-                                                color: 'black', // Color azul
-                                            }),
-                                        }}
-                                    />
                                     {/* Resto del código... */}
-      
+
                                 </div>
                             </td>
 
@@ -463,27 +493,54 @@ function TablaAlimentos() {
             <br />
 
 
-            {showModal && (
+            {showExedenteCalorias && (
                 <Modal
-                    isOpen={showModal}
-                    onRequestClose={() => setShowModal(false)}
-                    contentLabel="Ejemplo de ventana modal"
-                    className="modal-estilo"
-                >
-                    <h2>Las calorías están geniales</h2>
-                    <button onClick={() => setShowModal(false)}>Cerrar</button>
-                </Modal>
-            )}
-
-            {showModal2 && (
-                <Modal
-                    isOpen={showModal2}
-                    onRequestClose={() => setShowModal2(false)}
+                    isOpen={showExedenteCalorias}
+                    onRequestClose={() => setExedenteCalorias(false)}
                     contentLabel="Ejemplo de ventana modal2"
                     className="modal-estilo"
                 >
                     <h3>Las calorías están algo mal</h3>
-                    <button onClick={() => setShowModal2(false)}>Cerrar</button>
+                    <button onClick={() => setExedenteCalorias(false)}>Cerrar</button>
+                </Modal>
+            )}
+
+            {showFaltanProteinas && (
+                <Modal
+                    isOpen={showFaltanProteinas}
+                    onRequestClose={() => setFaltanProteinas(false)}
+                    contentLabel="Ejemplo de ventana modal2"
+                    className="modal-estilo"
+                >
+                    <h3>Calorias BIEN</h3>
+                    <h3>FALTAN PROTEINAS</h3>
+                    <button onClick={() => setFaltanProteinas(false)}>Cerrar</button>
+                </Modal>
+            )}
+
+            {showFaltanCarbohidratos && (
+                <Modal
+                    isOpen={showFaltanCarbohidratos}
+                    onRequestClose={() => setFaltanCarbohidratos(false)}
+                    contentLabel="Ejemplo de ventana modal2"
+                    className="modal-estilo"
+                >
+                   <h3>Calorias BIEN</h3>
+                   <h3>FALTAN CARBOHIDRATOS</h3>
+                    <button onClick={() => setFaltanCarbohidratos(false)}>Cerrar</button>
+                </Modal>
+            )}
+
+            {showFaltanGrasas && (
+                <Modal
+                    isOpen={showFaltanGrasas}
+                    onRequestClose={() => setFaltanGrasas(false)}
+                    contentLabel="Ejemplo de ventana modal2"
+                    className="modal-estilo"
+                >
+                   <h3>Calorias BIEN</h3>
+                   <h3>FALTAN GRASAS</h3>
+                    <button onClick={() => setFaltanGrasas(false)}>Cerrar</button>
                 </Modal>
             )}
 
