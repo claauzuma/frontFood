@@ -14,7 +14,7 @@ function App() {
   return (
     <>
 
-<div style={{ backgroundColor: '#ABEBC6', border: '2px solid black' }}>
+
 
 
     <Bienvenida />
@@ -22,7 +22,7 @@ function App() {
       <br />
       {tablas}
 
-    </div>
+
 
     </>
   );
