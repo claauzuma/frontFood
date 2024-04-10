@@ -6,6 +6,8 @@ import Calorias from './Calorias/Calorias';
 import Modal from 'react-modal';
 import Relleno from './Relleno/Relleno';
 
+
+
 Modal.setAppElement('#root');
 
 function TablaAlimentos() {
@@ -439,6 +441,7 @@ function TablaAlimentos() {
                 <tbody>
 
                     {alimentos.map((alimento, index) => (
+
                         <tr key={index}>
                             <td>
                                 <div style={{ display: 'flex', alignItems: 'center' }}>
@@ -476,6 +479,7 @@ function TablaAlimentos() {
                                                     }),
                                                 }}
                                             />
+                                            <img src='../public/images/pollo.jpg' alt="" />
                                             <div className="botones-container">
                                                 <button style={{ backgroundColor: '#EDBB99' }} onClick={() => obtenerAleatorioProte(index)}>PR</button>
                                                 <button style={{ backgroundColor: '#ABB2B9' }} onClick={() => obtenerAleatorioCarbo(index)}>CH</button>
