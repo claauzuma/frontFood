@@ -17,6 +17,7 @@ function TablaAlimentos() {
     const [showFaltanProteinas, setFaltanProteinas] = useState(false);
     const [showFaltanCarbohidratos, setFaltanCarbohidratos] = useState(false);
     const [showFaltanGrasas, setFaltanGrasas] = useState(false);
+    const [alimentoSeleccionado, setAlimentoSeleccionado] = useState('');
 
 
 
@@ -48,14 +49,14 @@ function TablaAlimentos() {
         }
 
         else if ((grasasTotales + 10) < gr) {
-  
+
             setFaltanGrasas(true)
 
         }
 
-        
+
         else if ((chTotales + 10) < ch) {
-     
+
             setFaltanCarbohidratos(true)
 
         }
@@ -135,7 +136,53 @@ function TablaAlimentos() {
     }, []);
 
 
+    const obtenerAleatorioProte = async (index) => {
+        try {
+            console.log("Los alimentos son :" + alimentos[0].nombre)
+            const response = await axios.get(servidor + "/api/alimentos/aleatorioprote");
+            console.log(response.data)  //Aca me trae todo bien
+            const alimAleat = response.data; // Suponiendo que la respuesta es un objeto con los datos del alimento
+            const alimentoAleatorio = {nombre: alimAleat.Alimentos, cantidad: '', unidad: "", cantManual: '', proteinas: '', carbohidratos: '', grasas: '', calorias: ''}
+            const nuevosAlimentos = [...alimentos];
+            nuevosAlimentos[index] = alimentoAleatorio; // Reemplazar el alimento en el índice correspondiente
+            setAlimentos(nuevosAlimentos); // Actualizar el estado alimentos
+            setAlimentoSeleccionado(alimentoAleatorio.nombre); // Establece el alimento aleatorio como el alimento seleccionado en el input select
+        } catch (error) {
+            console.error(error);
+        }
+    };
 
+
+
+    const obtenerAleatorioCarbo = async (index) => {
+        try {
+            const response = await axios.get(servidor + "/api/alimentos/aleatoriocarbo");
+            console.log(response.data)  //Aca me trae todo bien
+            const alimAleat = response.data; // Suponiendo que la respuesta es un objeto con los datos del alimento
+            const alimentoAleatorio = {nombre: alimAleat.Alimentos, cantidad: '', unidad: "", cantManual: '', proteinas: '', carbohidratos: '', grasas: '', calorias: ''}
+            const nuevosAlimentos = [...alimentos];
+            nuevosAlimentos[index] = alimentoAleatorio; // Reemplazar el alimento en el índice correspondiente
+            setAlimentos(nuevosAlimentos); // Actualizar el estado alimentos
+            setAlimentoSeleccionado(alimentoAleatorio.nombre); // Establece el alimento aleatorio como el alimento seleccionado en el input select
+        } catch (error) {
+            console.error(error);
+        }
+    };
+
+    const obtenerAleatorioGrasas = async (index) => {
+        try {
+            const response = await axios.get(servidor + "/api/alimentos/aleatoriograsas");
+            console.log(response.data)  //Aca me trae todo bien
+            const alimAleat = response.data; // Suponiendo que la respuesta es un objeto con los datos del alimento
+            const alimentoAleatorio = {nombre: alimAleat.Alimentos, cantidad: '', unidad: "", cantManual: '', proteinas: '', carbohidratos: '', grasas: '', calorias: ''}
+            const nuevosAlimentos = [...alimentos];
+            nuevosAlimentos[index] = alimentoAleatorio; // Reemplazar el alimento en el índice correspondiente
+            setAlimentos(nuevosAlimentos); // Actualizar el estado alimentos
+            setAlimentoSeleccionado(alimentoAleatorio.nombre); // Establece el alimento aleatorio como el alimento seleccionado en el input select
+        } catch (error) {
+            console.error(error);
+        }
+    };
 
     const handleChange = (selectedOption, index, campo) => {
         setAlimentos(prevAlimentos => {
@@ -430,9 +477,9 @@ function TablaAlimentos() {
                                                 }}
                                             />
                                             <div className="botones-container">
-                                                <button style={{ backgroundColor: '#EDBB99' }}>PR</button>
-                                                <button style={{ backgroundColor: '#ABB2B9' }}>CH</button>
-                                                <button style={{ backgroundColor: '#F5B7B1' }}>GR</button>
+                                                <button style={{ backgroundColor: '#EDBB99' }} onClick={() => obtenerAleatorioProte(index)}>PR</button>
+                                                <button style={{ backgroundColor: '#ABB2B9' }} onClick={() => obtenerAleatorioCarbo(index)}>CH</button>
+                                                <button style={{ backgroundColor: '#F5B7B1' }} onClick={() => obtenerAleatorioGrasas(index)}>GR</button>
                                             </div>
                                         </div>
 
@@ -525,8 +572,8 @@ function TablaAlimentos() {
                     contentLabel="Ejemplo de ventana modal2"
                     className="modal-estilo"
                 >
-                   <h3>Calorias BIEN</h3>
-                   <h3>FALTAN CARBOHIDRATOS</h3>
+                    <h3>Calorias BIEN</h3>
+                    <h3>FALTAN CARBOHIDRATOS</h3>
                     <button onClick={() => setFaltanCarbohidratos(false)}>Cerrar</button>
                 </Modal>
             )}
@@ -538,8 +585,8 @@ function TablaAlimentos() {
                     contentLabel="Ejemplo de ventana modal2"
                     className="modal-estilo"
                 >
-                   <h3>Calorias BIEN</h3>
-                   <h3>FALTAN GRASAS</h3>
+                    <h3>Calorias BIEN</h3>
+                    <h3>FALTAN GRASAS</h3>
                     <button onClick={() => setFaltanGrasas(false)}>Cerrar</button>
                 </Modal>
             )}
