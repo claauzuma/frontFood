@@ -454,7 +454,8 @@ function TablaAlimentos() {
                                     >
                                         X
                                     </button>
-                                    <img src="/images/pechugapollo.jpg" alt="" style={{ width: '50px', height: 'auto',marginBottom: '15px', marginRight:'5px'}} />
+                
+                                    
                                     <div className='cuadro'>
                                         <div>
                                        
@@ -483,6 +484,7 @@ function TablaAlimentos() {
                                                     }),
                                                 }}
                                             />
+                                           
                                           
                                             <div className="botones-container">
                                                 <button style={{ backgroundColor: '#EDBB99' }} onClick={() => obtenerAleatorioProte(index)}>PR</button>
@@ -490,6 +492,8 @@ function TablaAlimentos() {
                                                 <button style={{ backgroundColor: '#F5B7B1' }} onClick={() => obtenerAleatorioGrasas(index)}>GR</button>
                                             </div>
                                         </div>
+
+                                        <img src="/images/pechugapollo.jpg" alt="" style={{ width: '50px', height: 'auto', marginBottom: '15px', marginRight: '5px' }} />
 
                                     </div>
 
