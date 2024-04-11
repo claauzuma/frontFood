@@ -118,7 +118,8 @@ function TablaAlimentos() {
     const [caloriasTotales, setCaloriasTotales] = useState(0);
 
     const [listaAlimentos, setListaAlimentos] = useState([]);
-    const servidor = "https://apifoods-production.up.railway.app"
+    const servidor = "http://localhost:8080"
+
 
     ///"https://apifoods-production.up.railway.app"
     ///ttp://"http://localhost:8080"
@@ -429,16 +430,17 @@ function TablaAlimentos() {
             <Calorias proteinas={proteinasTotales} carbohidratos={carbohidratosTotales} grasas={grasasTotales} setProteinas={setProteinasTotales}
                 setCarbohidratos={setCarbohidratosTotales} setGrasas={setGrasasTotales} calorias={caloriasTotales} setCalorias={setCaloriasTotales} tipo={"normal"} />
 
+
+            
+            
+            <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'column',marginTop: '20px', marginBottom: '5px' }}>
+            <button className='botoncito' onClick={() => setAbajo(!abajo)}>Opciones alimentos aleatorios</button>
             {
                 abajo && (
                     <Relleno />
                 )
 
             }
-            
-            
-            <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'column' }}>
-            <button className='botoncito' onClick={() => setAbajo(!abajo)}>Elegir aleatorio</button>
 
             </div>
             
