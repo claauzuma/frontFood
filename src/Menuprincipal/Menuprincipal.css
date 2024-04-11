@@ -1,0 +1,37 @@
+.contenedorPadre{
+    border-color: black;
+    border-style: double;
+    background-color: whitesmoke;
+    width: 500px;
+
+}
+.img {
+    margin-top: 14px;
+    margin-left: 10px;
+}
+
+.contenedor {
+    display: flex;
+    align-items: center; /* Centra los elementos verticalmente */
+    width: 400px; /* Sin comillas */
+    height: 40px; /* Sin comillas */
+    margin-bottom: 5px;
+    background-color: whitesmoke;
+}
+
+.nombreAlimento {
+    background-color: red;
+    padding-left: 30px;
+    margin-right: 10px;
+    width: 250px;
+    height: 40px;
+}
+
+.cantidadAlimento {
+    margin-left: 5px; /* Deja que el navegador calcule el margen izquierdo automáticamente */
+    margin-right: 5px; /* Establece un margen derecho de 5px */
+    padding: 10px;
+    color: gray;
+    background-color: blue;
+    width: 250px;
+}

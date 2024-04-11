@@ -446,6 +446,7 @@ function TablaAlimentos() {
                         <tr key={index}>
                             <td>
                                 <div style={{ display: 'flex', alignItems: 'center' }}>
+                                    
 
                                     <button
                                         className={alimento.nombre ? "botonEliminar" : "botonFondo"}
@@ -453,8 +454,10 @@ function TablaAlimentos() {
                                     >
                                         X
                                     </button>
+                                    <img src="/images/pechugapollo.jpg" alt="" style={{ width: '50px', height: 'auto',marginBottom: '15px', marginRight:'5px'}} />
                                     <div className='cuadro'>
                                         <div>
+                                       
                                             <Select
                                                 className='classSelect'
                                                 value={{ value: alimento.nombre, label: alimento.nombre }}
@@ -480,7 +483,7 @@ function TablaAlimentos() {
                                                     }),
                                                 }}
                                             />
-                                          <img src="/images/pechugapollo.jpg" alt="" />
+                                          
                                             <div className="botones-container">
                                                 <button style={{ backgroundColor: '#EDBB99' }} onClick={() => obtenerAleatorioProte(index)}>PR</button>
                                                 <button style={{ backgroundColor: '#ABB2B9' }} onClick={() => obtenerAleatorioCarbo(index)}>CH</button>
