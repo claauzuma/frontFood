@@ -123,7 +123,7 @@ function TablaAlimentos() {
     const servidor = "https://apifoods-production.up.railway.app"
 
 
-    ///"https://apifoods-production.up.railway.app"
+    ///"http://localhost:8080"
     ///ttp://"http://localhost:8080"
 
 
@@ -462,7 +462,7 @@ function TablaAlimentos() {
                 <Button onClick={() => setMacros(true)} style={{ marginLeft: '10px' }}>Editar</Button>
             </div>
 
-            <div style={{marginTop:'-10px',marginLeft:'-75px', display: 'flex', justifyContent: 'center' }}>
+            <div style={{ marginTop: '-10px', marginLeft: '-75px', display: 'flex', justifyContent: 'center' }}>
 
 
                 <div style={{ display: 'flex', alignItems: 'center', marginRight: '20px' }}>
@@ -681,7 +681,7 @@ function TablaAlimentos() {
                     <Calorias proteinas={proteinas} carbohidratos={carbohidratos} grasas={grasas} setProteinas={setProteinas}
                         setCarbohidratos={setCarbohidratos} setGrasas={setGrasas} calorias={calorias} setCalorias={setCalorias} tipo={"automatico"} />
                     <div>
-                    <button onClick={() => { setCalorias(proteinas * 4 + carbohidratos * 4 + grasas * 9); setMacros(false); }}>Guardar cambios</button>
+                        <button onClick={() => { setCalorias(proteinas * 4 + carbohidratos * 4 + grasas * 9); setMacros(false); }}>Guardar cambios</button>
                     </div>
 
 
@@ -690,7 +690,13 @@ function TablaAlimentos() {
             )}
 
             {showExedenteCalorias && (
-                <Modal
+                <Modal style={{
+                    overlay: {
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center'
+                    }
+                }}
                     isOpen={showExedenteCalorias}
                     onRequestClose={() => setExedenteCalorias(false)}
                     contentLabel="Ejemplo de ventana modal2"

@@ -1,4 +1,12 @@
 /* Estilos para pantallas pequeñas */
+
+body {
+  max-width: 100%;
+  margin: 0 auto;
+  padding: 20px; /* Agrega un relleno opcional para evitar que el contenido se pegue a los bordes */
+}
+
+
 @media (max-width: 480px) {
   .inputContainer {
     flex-direction: column;
