@@ -5,6 +5,7 @@ import Select from 'react-select';
 import Calorias from './Calorias/Calorias';
 import Modal from 'react-modal';
 import Relleno from './Relleno/Relleno';
+import Button from '@mui/material/Button';
 
 
 
@@ -13,6 +14,7 @@ Modal.setAppElement('#root');
 
 function TablaAlimentos() {
 
+    const [showMacros, setMacros] = useState(false);
     const [showExedenteCalorias, setExedenteCalorias] = useState(false);
     const [showExcedenCaloriasFaltanProtes, setExcedenCaloriasFaltanProtes] = useState(false);
     const [showExcedenCaloriasFaltanCarbos, setExcedenCaloriasFaltanCarbos] = useState(false);
@@ -77,13 +79,13 @@ function TablaAlimentos() {
     };
 
     const [alimentos, setAlimentos] = useState([
-        { nombre: "", cantidad: '', unidad: "", cantManual: '', proteinas: '', carbohidratos: '', grasas: '', calorias: '', mostrarBotones: true},
+        { nombre: "", cantidad: '', unidad: "", cantManual: '', proteinas: '', carbohidratos: '', grasas: '', calorias: '', mostrarBotones: true },
         { nombre: '', cantidad: '', unidad: "", cantManual: '', proteinas: '', carbohidratos: '', grasas: '', calorias: '' },
         { nombre: '', cantidad: '', unidad: "", cantManual: '', proteinas: '', carbohidratos: '', grasas: '', calorias: '' },
-        { nombre: '', cantidad: '', unidad: "", cantManual: '', proteinas: '', carbohidratos: '', grasas: '', calorias: ''  },
-        { nombre: '', cantidad: '', unidad: "", cantManual: '', proteinas: '', carbohidratos: '', grasas: '', calorias: ''  },
         { nombre: '', cantidad: '', unidad: "", cantManual: '', proteinas: '', carbohidratos: '', grasas: '', calorias: '' },
-        { nombre: '', cantidad: '', unidad: "", cantManual: '', proteinas: '', carbohidratos: '', grasas: '', calorias: ''  }
+        { nombre: '', cantidad: '', unidad: "", cantManual: '', proteinas: '', carbohidratos: '', grasas: '', calorias: '' },
+        { nombre: '', cantidad: '', unidad: "", cantManual: '', proteinas: '', carbohidratos: '', grasas: '', calorias: '' },
+        { nombre: '', cantidad: '', unidad: "", cantManual: '', proteinas: '', carbohidratos: '', grasas: '', calorias: '' }
     ]);
 
     const eliminarAlimento = (index) => {
@@ -248,7 +250,7 @@ function TablaAlimentos() {
     const handleGenerarTodo = async () => {
 
         await handleGenerar();
-        
+
         setCaloriasTotales(0)
         let nombreAlim1 = "";
         let nombreAlim2 = "";
@@ -423,27 +425,102 @@ function TablaAlimentos() {
     return (
         <>
 
-
-            <Calorias proteinas={proteinas} carbohidratos={carbohidratos} grasas={grasas} setProteinas={setProteinas}
-                setCarbohidratos={setCarbohidratos} setGrasas={setGrasas} calorias={calorias} setCalorias={setCalorias} tipo={"automatico"} />
-
-            <Calorias proteinas={proteinasTotales} carbohidratos={carbohidratosTotales} grasas={grasasTotales} setProteinas={setProteinasTotales}
-                setCarbohidratos={setCarbohidratosTotales} setGrasas={setGrasasTotales} calorias={caloriasTotales} setCalorias={setCaloriasTotales} tipo={"normal"} />
+            <div style={{ display: 'flex', justifyContent: 'center' }}>
 
 
-            
-            
-            <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'column',marginTop: '20px', marginBottom: '5px' }}>
-            <button className='botoncito' onClick={() => setAbajo(!abajo)}>Opciones alimentos aleatorios</button>
-            {
-                abajo && (
-                    <Relleno />
-                )
+                <div style={{ display: 'flex', alignItems: 'center', marginRight: '20px' }}>
 
-            }
+                    <div style={{ borderRadius: '50%', width: '30px', height: '30px', backgroundColor: 'red', display: 'flex', justifyContent: 'center', alignItems: 'center', marginRight: '10px' }}>
+                        <h2 style={{ color: 'white', margin: '0' }}>P</h2>
+                    </div>
+                    <h2>{proteinas || "0"}g</h2>
+
+                </div>
+
+                <div style={{ display: 'flex', alignItems: 'center', marginRight: '20px' }}>
+                    <div style={{ borderRadius: '50%', width: '30px', height: '30px', backgroundColor: 'blue', display: 'flex', justifyContent: 'center', alignItems: 'center', marginRight: '10px' }}>
+                        <h2 style={{ color: 'white', margin: '0' }}>C</h2>
+                    </div>
+                    <h2>{carbohidratos || 0}g</h2>
+                </div>
+
+                <div style={{ display: 'flex', alignItems: 'center' }}>
+                    <div style={{ borderRadius: '50%', width: '30px', height: '30px', backgroundColor: 'green', display: 'flex', justifyContent: 'center', alignItems: 'center', marginRight: '10px' }}>
+                        <h2 style={{ color: 'white', margin: '0' }}>G</h2>
+                    </div>
+                    <h2>{grasas || 0}g</h2>
+                </div>
+
+                <div style={{ display: 'flex', alignItems: 'center' }}>
+                    <div style={{ color: 'white', marginLeft: '20px', borderRadius: '90%', width: '80px', height: '40px', backgroundColor: 'green', display: 'flex', justifyContent: 'center', alignItems: 'center', marginLeft: '10px' }}>
+                        <h2 style={{ color: 'white', margin: '0' }}></h2>
+                        <h3>{calorias || 0}Cals</h3>
+                    </div>
+
+                </div>
+
+                <Button onClick={() => setMacros(true)} style={{ marginLeft: '10px' }}>Editar</Button>
+            </div>
+
+            <div style={{marginTop:'-10px',marginLeft:'-75px', display: 'flex', justifyContent: 'center' }}>
+
+
+                <div style={{ display: 'flex', alignItems: 'center', marginRight: '20px' }}>
+
+                    <div style={{ borderRadius: '50%', width: '30px', height: '30px', backgroundColor: 'red', display: 'flex', justifyContent: 'center', alignItems: 'center', marginRight: '10px' }}>
+                        <h2 style={{ color: 'white', margin: '0' }}>P</h2>
+                    </div>
+                    <h2>{proteinasTotales || "0"}g</h2>
+
+                </div>
+
+                <div style={{ display: 'flex', alignItems: 'center', marginRight: '20px' }}>
+                    <div style={{ borderRadius: '50%', width: '30px', height: '30px', backgroundColor: 'blue', display: 'flex', justifyContent: 'center', alignItems: 'center', marginRight: '10px' }}>
+                        <h2 style={{ color: 'white', margin: '0' }}>C</h2>
+                    </div>
+                    <h2>{carbohidratosTotales || 0}g</h2>
+                </div>
+
+                <div style={{ display: 'flex', alignItems: 'center' }}>
+                    <div style={{ borderRadius: '50%', width: '30px', height: '30px', backgroundColor: 'green', display: 'flex', justifyContent: 'center', alignItems: 'center', marginRight: '10px' }}>
+                        <h2 style={{ color: 'white', margin: '0' }}>G</h2>
+                    </div>
+                    <h2>{grasasTotales || 0}g</h2>
+                </div>
+
+                <div style={{ display: 'flex', alignItems: 'center' }}>
+                    <div style={{ color: 'white', marginLeft: '20px', borderRadius: '90%', width: '80px', height: '40px', backgroundColor: 'green', display: 'flex', justifyContent: 'center', alignItems: 'center', marginLeft: '10px' }}>
+                        <h2 style={{ color: 'white', margin: '0' }}></h2>
+                        <h3>{caloriasTotales || 0}Cals</h3>
+                    </div>
+
+                </div>
 
             </div>
-            
+
+
+
+
+
+
+            {/* 
+<Calorias proteinas={proteinasTotales} carbohidratos={carbohidratosTotales} grasas={grasasTotales} setProteinas={setProteinasTotales}
+                setCarbohidratos={setCarbohidratosTotales} setGrasas={setGrasasTotales} calorias={caloriasTotales} setCalorias={setCaloriasTotales} tipo={"normal"} />
+*/}
+
+
+
+            <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'column', marginTop: '20px', marginBottom: '5px' }}>
+                <button className='botoncito' onClick={() => setAbajo(!abajo)}>Opciones alimentos aleatorios</button>
+                {
+                    abajo && (
+                        <Relleno />
+                    )
+
+                }
+
+            </div>
+
 
             <table className='tablaAlimentos' style={{ backgroundColor: '#F7F9F9  ', border: '2px solid black' }}>
                 <thead>
@@ -471,7 +548,7 @@ function TablaAlimentos() {
                                         X
                                     </button>
 
-                                    <img src="/images/pechugapollo.jpg" alt="" style={{ width: '50px', height: 'auto', marginBottom: '1px', marginRight: '5px' }} />
+                                    <img src="/images/pescadoblanco.jpg" alt="" style={{ width: '50px', height: '40px', marginBottom: '1px', marginRight: '5px' }} />
 
                                     <div className='cuadro'>
                                         <div>
@@ -502,7 +579,7 @@ function TablaAlimentos() {
                                                 }}
                                             />
                                             {
-                                                abajo && 
+                                                abajo &&
                                                 (<div className="botones-container">
                                                     <button style={{ backgroundColor: '#EDBB99' }} onClick={() => obtenerAleatorioProte(index)}>PR</button>
                                                     <button style={{ backgroundColor: '#ABB2B9' }} onClick={() => obtenerAleatorioCarbo(index)}>CH</button>
@@ -551,7 +628,7 @@ function TablaAlimentos() {
 
                                     <div>
 
-                                  
+
 
                                     </div>
 
@@ -571,13 +648,13 @@ function TablaAlimentos() {
                             </td>
 
                             <td>
-                            <input
+                                <input
                                     className='inputNumerico'
                                     type="text"
                                     value={alimento.calorias}
                                     onChange={e => handleChange2(e, index, 'calorias')} // Permitir la edición de cantidad
                                 />
-                                
+
                             </td>
                         </tr>
                     ))}
@@ -593,6 +670,24 @@ function TablaAlimentos() {
             </table>
             <br />
 
+
+            {showMacros && (
+                <Modal
+                    isOpen={showMacros}
+                    onRequestClose={() => setMacros(false)}
+                    contentLabel="Ejemplo de ventana modal2"
+                    className="modal-estilo"
+                >
+                    <Calorias proteinas={proteinas} carbohidratos={carbohidratos} grasas={grasas} setProteinas={setProteinas}
+                        setCarbohidratos={setCarbohidratos} setGrasas={setGrasas} calorias={calorias} setCalorias={setCalorias} tipo={"automatico"} />
+                    <div>
+                    <button onClick={() => { setCalorias(proteinas * 4 + carbohidratos * 4 + grasas * 9); setMacros(false); }}>Guardar cambios</button>
+                    </div>
+
+
+                    <button onClick={() => setMacros(false)}>Cerrar</button>
+                </Modal>
+            )}
 
             {showExedenteCalorias && (
                 <Modal

@@ -4,6 +4,9 @@
     flex-direction: column;
   }
 
+  .claseProteinas, .claseCarbos, .claseGrasas {
+    display: inline-block;
+  }
   .botoncito-container {
     display: flex;
     justify-content: center; /* Centra horizontalmente */
