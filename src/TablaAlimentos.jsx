@@ -512,7 +512,7 @@ function TablaAlimentos() {
 
 
 
-            <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'column', marginTop: '20px', marginBottom: '5px' }}>
+            <div style={{marginLeft:'10%', display: 'flex', marginTop: '20px', marginBottom: '10px' }}>
                 <button className='botoncito' onClick={() => setAbajo(!abajo)}>Opciones alimentos aleatorios</button>
                 {
                     abajo && (
