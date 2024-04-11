@@ -21,6 +21,7 @@ function TablaAlimentos() {
     const [showFaltanCarbohidratos, setFaltanCarbohidratos] = useState(false);
     const [showFaltanGrasas, setFaltanGrasas] = useState(false);
     const [alimentoSeleccionado, setAlimentoSeleccionado] = useState('');
+    const [abajo, setAbajo] = useState('false');
 
 
 
@@ -76,13 +77,13 @@ function TablaAlimentos() {
     };
 
     const [alimentos, setAlimentos] = useState([
-        { nombre: "", cantidad: '', unidad: "", cantManual: '', proteinas: '', carbohidratos: '', grasas: '', calorias: '' },
+        { nombre: "", cantidad: '', unidad: "", cantManual: '', proteinas: '', carbohidratos: '', grasas: '', calorias: '', mostrarBotones: true},
         { nombre: '', cantidad: '', unidad: "", cantManual: '', proteinas: '', carbohidratos: '', grasas: '', calorias: '' },
         { nombre: '', cantidad: '', unidad: "", cantManual: '', proteinas: '', carbohidratos: '', grasas: '', calorias: '' },
+        { nombre: '', cantidad: '', unidad: "", cantManual: '', proteinas: '', carbohidratos: '', grasas: '', calorias: ''  },
+        { nombre: '', cantidad: '', unidad: "", cantManual: '', proteinas: '', carbohidratos: '', grasas: '', calorias: ''  },
         { nombre: '', cantidad: '', unidad: "", cantManual: '', proteinas: '', carbohidratos: '', grasas: '', calorias: '' },
-        { nombre: '', cantidad: '', unidad: "", cantManual: '', proteinas: '', carbohidratos: '', grasas: '', calorias: '' },
-        { nombre: '', cantidad: '', unidad: "", cantManual: '', proteinas: '', carbohidratos: '', grasas: '', calorias: '' },
-        { nombre: '', cantidad: '', unidad: "", cantManual: '', proteinas: '', carbohidratos: '', grasas: '', calorias: '' }
+        { nombre: '', cantidad: '', unidad: "", cantManual: '', proteinas: '', carbohidratos: '', grasas: '', calorias: ''  }
     ]);
 
     const eliminarAlimento = (index) => {
@@ -145,7 +146,7 @@ function TablaAlimentos() {
             const response = await axios.get(servidor + "/api/alimentos/aleatorioprote");
             console.log(response.data)  //Aca me trae todo bien
             const alimAleat = response.data; // Suponiendo que la respuesta es un objeto con los datos del alimento
-            const alimentoAleatorio = {nombre: alimAleat.Alimentos, cantidad: '', unidad: "", cantManual: '', proteinas: '', carbohidratos: '', grasas: '', calorias: ''}
+            const alimentoAleatorio = { nombre: alimAleat.Alimentos, cantidad: '', unidad: "", cantManual: '', proteinas: '', carbohidratos: '', grasas: '', calorias: '' }
             const nuevosAlimentos = [...alimentos];
             nuevosAlimentos[index] = alimentoAleatorio; // Reemplazar el alimento en el índice correspondiente
             setAlimentos(nuevosAlimentos); // Actualizar el estado alimentos
@@ -162,7 +163,7 @@ function TablaAlimentos() {
             const response = await axios.get(servidor + "/api/alimentos/aleatoriocarbo");
             console.log(response.data)  //Aca me trae todo bien
             const alimAleat = response.data; // Suponiendo que la respuesta es un objeto con los datos del alimento
-            const alimentoAleatorio = {nombre: alimAleat.Alimentos, cantidad: '', unidad: "", cantManual: '', proteinas: '', carbohidratos: '', grasas: '', calorias: ''}
+            const alimentoAleatorio = { nombre: alimAleat.Alimentos, cantidad: '', unidad: "", cantManual: '', proteinas: '', carbohidratos: '', grasas: '', calorias: '' }
             const nuevosAlimentos = [...alimentos];
             nuevosAlimentos[index] = alimentoAleatorio; // Reemplazar el alimento en el índice correspondiente
             setAlimentos(nuevosAlimentos); // Actualizar el estado alimentos
@@ -177,7 +178,7 @@ function TablaAlimentos() {
             const response = await axios.get(servidor + "/api/alimentos/aleatoriograsas");
             console.log(response.data)  //Aca me trae todo bien
             const alimAleat = response.data; // Suponiendo que la respuesta es un objeto con los datos del alimento
-            const alimentoAleatorio = {nombre: alimAleat.Alimentos, cantidad: '', unidad: "", cantManual: '', proteinas: '', carbohidratos: '', grasas: '', calorias: ''}
+            const alimentoAleatorio = { nombre: alimAleat.Alimentos, cantidad: '', unidad: "", cantManual: '', proteinas: '', carbohidratos: '', grasas: '', calorias: '' }
             const nuevosAlimentos = [...alimentos];
             nuevosAlimentos[index] = alimentoAleatorio; // Reemplazar el alimento en el índice correspondiente
             setAlimentos(nuevosAlimentos); // Actualizar el estado alimentos
@@ -244,9 +245,10 @@ function TablaAlimentos() {
 
 
     const handleGenerarTodo = async () => {
-        await handleGenerar();
-        setCaloriasTotales(0)
 
+        await handleGenerar();
+        
+        setCaloriasTotales(0)
         let nombreAlim1 = "";
         let nombreAlim2 = "";
         let nombreAlim3 = "";
@@ -427,15 +429,27 @@ function TablaAlimentos() {
             <Calorias proteinas={proteinasTotales} carbohidratos={carbohidratosTotales} grasas={grasasTotales} setProteinas={setProteinasTotales}
                 setCarbohidratos={setCarbohidratosTotales} setGrasas={setGrasasTotales} calorias={caloriasTotales} setCalorias={setCaloriasTotales} tipo={"normal"} />
 
-            <Relleno />
+            {
+                abajo && (
+                    <Relleno />
+                )
 
-            <table className='tablaAlimentos' style={{ backgroundColor: '#FAD7A0  ', border: '2px solid black' }}>
+            }
+            
+            
+            <div style={{ display: 'flex', alignItems: 'center', marginBottom:'10px', marginLeft: '550px'}}>
+            <button className='botoncito' onClick={() => setAbajo(!abajo)}>Elegir aleatorio</button>
+
+            </div>
+            
+
+            <table className='tablaAlimentos' style={{ backgroundColor: '#F7F9F9  ', border: '2px solid black' }}>
                 <thead>
                     <tr>
                         <th>Nombre</th>
                         <th className='letras th-letras'>Cant</th>
                         <th className='letras th-letras'>Manual</th>
-                        <th className='letras th-letras'>Calorias</th>
+                        <th className='letras th-letras'>Más</th>
 
                     </tr>
                 </thead>
@@ -446,7 +460,7 @@ function TablaAlimentos() {
                         <tr key={index}>
                             <td>
                                 <div style={{ display: 'flex', alignItems: 'center' }}>
-                                    
+
 
                                     <button
                                         className={alimento.nombre ? "botonEliminar" : "botonFondo"}
@@ -454,11 +468,12 @@ function TablaAlimentos() {
                                     >
                                         X
                                     </button>
-                
-                                    
+
+                                    <img src="/images/pechugapollo.jpg" alt="" style={{ width: '50px', height: 'auto', marginBottom: '1px', marginRight: '5px' }} />
+
                                     <div className='cuadro'>
                                         <div>
-                                       
+
                                             <Select
                                                 className='classSelect'
                                                 value={{ value: alimento.nombre, label: alimento.nombre }}
@@ -484,16 +499,21 @@ function TablaAlimentos() {
                                                     }),
                                                 }}
                                             />
-                                           
-                                          
-                                            <div className="botones-container">
-                                                <button style={{ backgroundColor: '#EDBB99' }} onClick={() => obtenerAleatorioProte(index)}>PR</button>
-                                                <button style={{ backgroundColor: '#ABB2B9' }} onClick={() => obtenerAleatorioCarbo(index)}>CH</button>
-                                                <button style={{ backgroundColor: '#F5B7B1' }} onClick={() => obtenerAleatorioGrasas(index)}>GR</button>
-                                            </div>
+                                            {
+                                                abajo && 
+                                                (<div className="botones-container">
+                                                    <button style={{ backgroundColor: '#EDBB99' }} onClick={() => obtenerAleatorioProte(index)}>PR</button>
+                                                    <button style={{ backgroundColor: '#ABB2B9' }} onClick={() => obtenerAleatorioCarbo(index)}>CH</button>
+                                                    <button style={{ backgroundColor: '#F5B7B1' }} onClick={() => obtenerAleatorioGrasas(index)}>GR</button>
+                                                </div>)
+
+
+                                            }
+
+
                                         </div>
 
-                                        <img src="/images/pechugapollo.jpg" alt="" style={{ width: '50px', height: 'auto', marginBottom: '15px', marginRight: '5px' }} />
+
 
                                     </div>
 
@@ -505,19 +525,38 @@ function TablaAlimentos() {
 
 
                             <td>
-                                <input
-                                    className='inputImportante'
-                                    type="text"
-                                    value={alimento.cantidad}
-                                    onChange={e => handleChange(e, index, 'cantidad')} // Permitir la edición de cantidad
-                                />
-                                <input
-                                    style={{ fontSize: '10px', width: '18px' }}
-                                    className='inputImportante'
-                                    type="text"
-                                    value={alimento.unidad}
-                                    onChange={e => handleChange(e, index, 'unidad')} // Permitir la edición de cantidad
-                                />
+
+                                <div>
+
+                                    <div>
+                                        <input
+                                            className='inputImportante'
+                                            type="text"
+                                            value={alimento.cantidad}
+                                            onChange={e => handleChange(e, index, 'cantidad')} // Permitir la edición de cantidad
+                                        />
+
+                                    </div>
+
+
+                                    <input
+                                        style={{ width: '30px' }}
+                                        className='inputCantidadManual'
+                                        type="text"
+                                        value={alimento.unidad}
+                                        onChange={e => handleChange(e, index, 'unidad')} // Permitir la edición de cantidad
+                                    />
+
+                                    <div>
+
+                                  
+
+                                    </div>
+
+
+                                </div>
+
+
                             </td>
 
                             <td>
@@ -530,12 +569,13 @@ function TablaAlimentos() {
                             </td>
 
                             <td>
-                                <input
+                            <input
                                     className='inputNumerico'
                                     type="text"
                                     value={alimento.calorias}
-                                    onChange={e => handleChange(e, index, 'calorias')} // Permitir la edición de calorías
+                                    onChange={e => handleChange2(e, index, 'calorias')} // Permitir la edición de cantidad
                                 />
+                                
                             </td>
                         </tr>
                     ))}

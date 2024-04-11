@@ -1,95 +1,72 @@
+/* Estilos para pantallas pequeñas */
 @media (max-width: 480px) {
   .inputContainer {
     flex-direction: column;
   }
 
-  .tablaAlimentos {
-    width: 100%; /* Ajustar al ancho de su contenedor */
-    overflow-x: auto; /* Agregar desplazamiento horizontal si es necesario */
-    white-space: nowrap; /* Evitar que el texto se envuelva */
-  }
-  
-  /* Estilos para pantallas pequeñas */
-  @media (max-width: 768px) {
-    .tablaAlimentos {
-      font-size: 12px; /* Reducir el tamaño de fuente */
-      /* Otros estilos según sea necesario */
-    }
+  .botoncito-container {
+    display: flex;
+    justify-content: center; /* Centra horizontalmente */
+    align-items: center; /* Centra verticalmente */
+    height: 100vh; /* Esto es opcional, pero puede ayudar a centrar verticalmente en toda la altura de la ventana */
   }
 
-  .css-1pahdxg-singleValue {
-    font-weight: bold; /* Texto en negrita */
-    
-  }
-  
-  
-
-  
-
-  .inputContainer label,
-  .inputContainer input {
-    width: 100%;
-  }
-
-  .container {
-    flex-direction: column;
-  }
-
-  
-  
-
-  .tablaAlimentos {
-    font-size: 12px;
-  }
+  /* Otras reglas para pantallas pequeñas */
 }
 
+/* Estilos generales */
 .tablaAlimentos {
   width: 100%; /* Ajustar al ancho de su contenedor */
   overflow-x: auto; /* Agregar desplazamiento horizontal si es necesario */
   white-space: nowrap; /* Evitar que el texto se envuelva */
 }
 
-
-
 .boton-container {
   text-align: center;
 }
 
 .inputImportante {
-  width: 35px; /* Ajusta el ancho según sea necesario */
+  width: 40px; /* Ajusta el ancho según sea necesario */
   color:black;
   font-weight: bold;
-  background-color: rgb(144, 238, 197);
+  background-color: #F7F9F9 ;
   border-radius: .3125rem;
-  border-style:solid;
-  border-color: black;
+  border-color: #F7F9F9 ;
   border-width: 1px;
-  
+  height: 17px;
+  font-size: 10px;
+  margin-bottom: 1px;
 }
 
-
+.inputCantidadManual {
+  width: 35px;
+  color: black;
+  font-weight: bold;
+  background-color: #F7F9F9;
+  border-radius: .3125rem;
+  border-color: #F7F9F9;
+  border-width: 1px;
+  margin-top: 0.5px; /* Reducir el margen superior */
+  height: 15px;
+  padding-top: 0px;
+  font-size: 10px;
+}
 
 .topInputs {
-
   margin-bottom: 10px ;
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
-
 }
 
 .bottomInputs {
-
   margin-bottom: 10px ;
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
-
 }
-
-
 
 .boton {
   background-color: #4ca5af; /* Color de fondo */
@@ -103,7 +80,6 @@
   margin: 6px 100px; /* Margen exterior */
   transition-duration: 0.4s; /* Duración de la transición */
   cursor: pointer; /* Cambiar el cursor al pasar por encima */
-
 
   /* Sombra */
   box-shadow: 0px 8px 16px rgba(0,0,0,0.2);
@@ -124,9 +100,7 @@
 }
 
 .classSelect {
- background-color: antiquewhite;
- 
-
+  background-color: antiquewhite;
 }
 
 .botonEliminar {
@@ -136,7 +110,6 @@
   cursor: pointer;
   font-size: 16px;
   margin-right: 5px;
-  
 }
 
 .botonEliminar:hover {
@@ -153,41 +126,36 @@
   margin-right: 5px;
 }
 
-
-
-
-
-
 .inputNumerico {
-    width: 35px; /* Ajusta el ancho del input aquí */
-    /* Otros estilos si es necesario */
-  }
+  width: 35px; /* Ajusta el ancho del input aquí */
+  /* Otros estilos si es necesario */
+}
 
-  .th-letras {
-    font-size: 10px !important;
-  }
-  .tablaAlimentos {
-    width: 200px; /* Por ejemplo */
-    height: 200px; /* Por ejemplo */
-    margin: auto;
-    top: 0; bottom: 0;
-    left: 0; right: 0;
+.th-letras {
+  font-size: 10px !important;
+}
 
-  }
+.tablaAlimentos {
+  width: 200px; /* Por ejemplo */
+  height: 200px; /* Por ejemplo */
+  margin: auto;
+  top: 0; bottom: 0;
+  left: 0; right: 0;
+}
 
-  .modal-estilo {
-    position: fixed;
-    top: 50%; /* Centra verticalmente el modal */
-    left: 50%; /* Centra horizontalmente el modal */
-    transform: translate(-50%, -50%); /* Centra completamente el modal */
-    width: 60%; /* Define el ancho del modal */
-    max-height: 80%; /* Define la altura máxima del modal */
-    overflow-y: auto; /* Habilita el desplazamiento vertical si el contenido es demasiado largo */
-    background-color: #fff; /* Color de fondo del modal */
-    padding: 20px; /* Añade un relleno alrededor del contenido del modal */
-    border-radius: 8px; /* Añade bordes redondeados */
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); /* Añade una sombra */
-    z-index: 1000; /* Asegura que el modal esté arriba de todo */
+.modal-estilo {
+  position: fixed;
+  top: 50%; /* Centra verticalmente el modal */
+  left: 50%; /* Centra horizontalmente el modal */
+  transform: translate(-50%, -50%); /* Centra completamente el modal */
+  width: 60%; /* Define el ancho del modal */
+  max-height: 80%; /* Define la altura máxima del modal */
+  overflow-y: auto; /* Habilita el desplazamiento vertical si el contenido es demasiado largo */
+  background-color: #fff; /* Color de fondo del modal */
+  padding: 20px; /* Añade un relleno alrededor del contenido del modal */
+  border-radius: 8px; /* Añade bordes redondeados */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); /* Añade una sombra */
+  z-index: 1000; /* Asegura que el modal esté arriba de todo */
 }
 
 .botones-container {
