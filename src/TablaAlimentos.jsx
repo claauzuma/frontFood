@@ -425,7 +425,7 @@ function TablaAlimentos() {
     return (
         <>
 
-            <div style={{ display: 'flex', justifyContent: 'center' }}>
+            <div style={{ marginLeft:'30%', display: 'flex'}}>
 
 
                 <div style={{ display: 'flex', alignItems: 'center', marginRight: '20px' }}>
@@ -462,7 +462,9 @@ function TablaAlimentos() {
                 <Button onClick={() => setMacros(true)} style={{ marginLeft: '10px' }}>Editar</Button>
             </div>
 
-            <div style={{ marginTop: '-10px', marginLeft: '-75px', display: 'flex', justifyContent: 'center' }}>
+            
+
+            <div style={{ marginLeft:'30%', display: 'flex'}}>
 
 
                 <div style={{ display: 'flex', alignItems: 'center', marginRight: '20px' }}>
