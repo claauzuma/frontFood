@@ -425,7 +425,7 @@ function TablaAlimentos() {
     return (
         <>
 
-            <div style={{ marginLeft:'20%', display: 'flex'}}>
+            <div style={{ marginLeft:'10%', display: 'flex'}}>
 
 
                 <div style={{ display: 'flex', alignItems: 'center', marginRight: '20px' }}>
@@ -464,7 +464,7 @@ function TablaAlimentos() {
 
             
 
-            <div style={{ marginLeft:'20%', display: 'flex'}}>
+            <div style={{ marginLeft:'10%', display: 'flex'}}>
 
 
                 <div style={{ display: 'flex', alignItems: 'center', marginRight: '20px' }}>
