@@ -97,16 +97,6 @@ const Calorias = (props) => {
             }}
         />
     </div>
-    <div className="inputContainer">
-        <label htmlFor="Calorias">Calorias</label>
-        <input
-            className="inputNumerico"
-            type="text"
-            value={calorias}
-            onChange={(e) => setCalorias(e.target.value)}
-
-        />
-    </div>
 </div>
 </>
   )

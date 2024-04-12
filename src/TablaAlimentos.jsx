@@ -6,6 +6,7 @@ import Calorias from './Calorias/Calorias';
 import Modal from 'react-modal';
 import Relleno from './Relleno/Relleno';
 import Button from '@mui/material/Button';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 
 
@@ -425,35 +426,77 @@ function TablaAlimentos() {
     return (
         <>
 
-            <div style={{ marginLeft:'10%', display: 'flex'}}>
+            <div style={{ marginLeft: '10%', display: 'flex' }}>
 
 
                 <div style={{ display: 'flex', alignItems: 'center', marginRight: '20px' }}>
 
-                    <div style={{ borderRadius: '50%', width: '30px', height: '30px', backgroundColor: 'red', display: 'flex', justifyContent: 'center', alignItems: 'center', marginRight: '10px' }}>
-                        <h2 style={{ color: 'white', margin: '0' }}>P</h2>
+                    <div style={{
+                        borderRadius: '50%',
+                        width: '30px',
+                        height: '30px',
+                        backgroundColor: 'white', /* Fondo blanco */
+                        border: '1px solid red', /* Borde rojo de 1px */
+                        display: 'flex',
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                        marginRight: '10px'
+                    }}>
+                        <h2 style={{ color: 'red', margin: '0' }}>P</h2>
                     </div>
                     <h2>{proteinas || "0"}g</h2>
 
                 </div>
 
                 <div style={{ display: 'flex', alignItems: 'center', marginRight: '20px' }}>
-                    <div style={{ borderRadius: '50%', width: '30px', height: '30px', backgroundColor: 'blue', display: 'flex', justifyContent: 'center', alignItems: 'center', marginRight: '10px' }}>
-                        <h2 style={{ color: 'white', margin: '0' }}>C</h2>
+                <div style={{
+                        borderRadius: '50%',
+                        width: '30px',
+                        height: '30px',
+                        backgroundColor: 'white', /* Fondo blanco */
+                        border: '1px solid blue', /* Borde rojo de 1px */
+                        display: 'flex',
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                        marginRight: '10px'
+                    }}>
+                        <h2 style={{ color: 'blue', margin: '0' }}>C</h2>
                     </div>
                     <h2>{carbohidratos || 0}g</h2>
                 </div>
 
                 <div style={{ display: 'flex', alignItems: 'center' }}>
-                    <div style={{ borderRadius: '50%', width: '30px', height: '30px', backgroundColor: 'green', display: 'flex', justifyContent: 'center', alignItems: 'center', marginRight: '10px' }}>
-                        <h2 style={{ color: 'white', margin: '0' }}>G</h2>
+                <div style={{
+                        borderRadius: '50%',
+                        width: '30px',
+                        height: '30px',
+                        backgroundColor: 'white', /* Fondo blanco */
+                        border: '1px solid green', /* Borde rojo de 1px */
+                        display: 'flex',
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                        marginRight: '10px'
+                    }}>
+                        <h2 style={{ color: 'green', margin: '0' }}>G</h2>
                     </div>
                     <h2>{grasas || 0}g</h2>
                 </div>
 
                 <div style={{ display: 'flex', alignItems: 'center' }}>
-                    <div style={{ color: 'white', marginLeft: '20px', borderRadius: '90%', width: '80px', height: '40px', backgroundColor: 'green', display: 'flex', justifyContent: 'center', alignItems: 'center', marginLeft: '10px' }}>
-                        <h2 style={{ color: 'white', margin: '0' }}></h2>
+                <div style={{ 
+                        color: 'black',
+                        marginLeft: '20px',
+                        borderRadius: '70%',
+                        width: '120px',
+                        height: '50px',
+                        backgroundColor: 'white', /* Fondo blanco */
+                        display: 'flex',
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                        marginLeft: '10px',
+                        boxShadow: '0 0 0 4px green inset' /* Contorno verde de 4px */
+                    }}>
+                        <h2 style={{ color: 'black', margin: '0' }}></h2>
                         <h3>{calorias || 0}Cals</h3>
                     </div>
 
@@ -462,9 +505,9 @@ function TablaAlimentos() {
                 <Button onClick={() => setMacros(true)} style={{ marginLeft: '10px' }}>Editar</Button>
             </div>
 
-            
 
-            <div style={{ marginLeft:'10%', display: 'flex'}}>
+
+            <div style={{ marginLeft: '10%', display: 'flex' }}>
 
 
                 <div style={{ display: 'flex', alignItems: 'center', marginRight: '20px' }}>
@@ -512,23 +555,33 @@ function TablaAlimentos() {
 
 
 
-            <div style={{marginLeft:'10%', display: 'flex', marginTop: '20px', marginBottom: '10px' }}>
-                <button className='botoncito' onClick={() => setAbajo(!abajo)}>Opciones alimentos aleatorios</button>
+            <div style={{ marginLeft: '10%', display: 'flex', marginTop: '20px', marginBottom: '10px' }}>
+            <button onClick={() => setAbajo(!abajo)} type="button" class="btn btn-outline-success">Opciones alimentos aleatorios</button>
+      
+
+
+            </div>
+
+            <div style={{ marginLeft: '10%', display: 'flex', marginTop: '-10px', marginBottom: '10px' }}>
                 {
+
                     abajo && (
                         <Relleno />
                     )
 
                 }
 
+
+
             </div>
 
 
-            <table className='tablaAlimentos' style={{ backgroundColor: '#F7F9F9  ', border: '2px solid black' }}>
+
+            <table className='tablaAlimentos' style={{ backgroundColor: '#F7F9F9  ', border: '2px solid green' }}>
                 <thead>
                     <tr>
-                        <th>Nombre</th>
-                        <th className='letras th-letras'>Cant</th>
+                        <th></th>
+                        <th className='letras th-letras'></th>
                         <th className='letras th-letras'>Manual</th>
                         <th className='letras th-letras'>Más</th>
 
@@ -687,7 +740,7 @@ function TablaAlimentos() {
                     </div>
 
 
-                    <button onClick={() => setMacros(false)}>Cerrar</button>
+                    <button onClick={() => { setMacros(false); setProteinas(0); setCarbohidratos(0); setGrasas(0); setCalorias(0) }}>Cerrar</button>
                 </Modal>
             )}
 
