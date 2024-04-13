@@ -80,8 +80,8 @@ function TablaAlimentos() {
     };
 
     const [alimentos, setAlimentos] = useState([
-        { nombre: "Banana", cantidad: '', unidad: "", cantManual: '', proteinas: '', carbohidratos: '', grasas: '', calorias: '', urlImage:'/images/banana.jpg'},
-        { nombre: 'Manzana', cantidad: '', unidad: "", cantManual: '', proteinas: '', carbohidratos: '', grasas: '', calorias: '' , urlImage:'/images/manzana.jpg'},
+        { nombre: "", cantidad: '', unidad: "", cantManual: '', proteinas: '', carbohidratos: '', grasas: '', calorias: '', urlImage:''},
+        { nombre: '', cantidad: '', unidad: "", cantManual: '', proteinas: '', carbohidratos: '', grasas: '', calorias: '' , urlImage:''},
         { nombre: '', cantidad: '', unidad: "", cantManual: '', proteinas: '', carbohidratos: '', grasas: '', calorias: '' , urlImage:''},
         { nombre: '', cantidad: '', unidad: "", cantManual: '', proteinas: '', carbohidratos: '', grasas: '', calorias: '' , urlImage:''},
         { nombre: '', cantidad: '', unidad: "", cantManual: '', proteinas: '', carbohidratos: '', grasas: '', calorias: '' , urlImage:''},
