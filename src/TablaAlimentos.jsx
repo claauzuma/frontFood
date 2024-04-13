@@ -80,8 +80,8 @@ function TablaAlimentos() {
     };
 
     const [alimentos, setAlimentos] = useState([
-        { nombre: "", cantidad: '', unidad: "", cantManual: '', proteinas: '', carbohidratos: '', grasas: '', calorias: '', urlImage:''},
-        { nombre: '', cantidad: '', unidad: "", cantManual: '', proteinas: '', carbohidratos: '', grasas: '', calorias: '' , urlImage:''},
+        { nombre: "Banana", cantidad: '', unidad: "", cantManual: '', proteinas: '', carbohidratos: '', grasas: '', calorias: '', urlImage:'/images/banana.jpg'},
+        { nombre: 'Manzana', cantidad: '', unidad: "", cantManual: '', proteinas: '', carbohidratos: '', grasas: '', calorias: '' , urlImage:'/images/manzana.jpg'},
         { nombre: '', cantidad: '', unidad: "", cantManual: '', proteinas: '', carbohidratos: '', grasas: '', calorias: '' , urlImage:''},
         { nombre: '', cantidad: '', unidad: "", cantManual: '', proteinas: '', carbohidratos: '', grasas: '', calorias: '' , urlImage:''},
         { nombre: '', cantidad: '', unidad: "", cantManual: '', proteinas: '', carbohidratos: '', grasas: '', calorias: '' , urlImage:''},
@@ -121,7 +121,7 @@ function TablaAlimentos() {
     const [caloriasTotales, setCaloriasTotales] = useState(0);
 
     const [listaAlimentos, setListaAlimentos] = useState([]);
-    const servidor = "https://apifoods-production.up.railway.app"
+    const servidor = "http://localhost:8080"
 
     ///"https://apifoods-production.up.railway.app"
     ///ttp://"http://localhost:8080"
@@ -141,6 +141,8 @@ function TablaAlimentos() {
 
         obtenerAlimentos();
     }, []);
+
+
 
 
     const obtenerAleatorioProte = async (index) => {
@@ -242,10 +244,7 @@ function TablaAlimentos() {
         console.log("La cantidad manual es " + alimentos[0].cantManual)
         console.log("La cantidad manual es " + alimentos[1].cantManual)
         console.log("La cantidad manual es " + alimentos[2].cantManual)
-        if (alimentos.some(alimento => alimento.cantManual > 0)) {
-            alert("Hay alimentos con cantidad manual")
-
-        } else {
+    
             if (proteinas == "" || grasas == "" || carbohidratos == "" || calorias == "") {
                 alert("Completa los campos de macronutrientes")
             } else {
@@ -261,7 +260,7 @@ function TablaAlimentos() {
             }
 
         }
-    }
+    
 
 
     const handleGenerarTodo = async () => {
@@ -349,13 +348,13 @@ function TablaAlimentos() {
 
 
 
-        let nuevaLista = [{ nombre: "", cantidad: '', unidad: "", cantManual: '', proteinas: '', carbohidratos: '', grasas: '', calorias: '' , urlImage: alims[0].urlImage},
-        { nombre: '', cantidad: '', unidad: "", cantManual: '', proteinas: '', carbohidratos: '', grasas: '', calorias: '' , urlImage:'', urlImage: alims[1].urlImage},
-        { nombre: '', cantidad: '', unidad: "", cantManual: '', proteinas: '', carbohidratos: '', grasas: '', calorias: '' , urlImage:'', urlImage: alims[2].urlImage},
-        { nombre: '', cantidad: '', unidad: "", cantManual: '', proteinas: '', carbohidratos: '', grasas: '', calorias: '' , urlImage:'', urlImage: alims[3].urlImage},
-        { nombre: '', cantidad: '', unidad: "", cantManual: '', proteinas: '', carbohidratos: '', grasas: '', calorias: '' , urlImage:'', urlImage: alims[4].urlImage},
-        { nombre: '', cantidad: '', unidad: "", cantManual: '', proteinas: '', carbohidratos: '', grasas: '', calorias: '' , urlImage:'', urlImage: alims[5].urlImage},
-        { nombre: '', cantidad: '', unidad: "", cantManual: '', proteinas: '', carbohidratos: '', grasas: '', calorias: '' , urlImage:'', urlImage: alims[6].urlImage}];
+        let nuevaLista = [{ nombre: "", cantidad: '', unidad: "", cantManual: alims[0].cantManual, proteinas: '', carbohidratos: '', grasas: '', calorias: '' , urlImage: alims[0].urlImage},
+        { nombre: '', cantidad: '', unidad: "", cantManual: alims[1].cantManual, proteinas: '', carbohidratos: '', grasas: '', calorias: '' , urlImage:'', urlImage: alims[1].urlImage},
+        { nombre: '', cantidad: '', unidad: "", cantManual: alims[2].cantManual, proteinas: '', carbohidratos: '', grasas: '', calorias: '' , urlImage:'', urlImage: alims[2].urlImage},
+        { nombre: '', cantidad: '', unidad: "", cantManual: alims[3].cantManual, proteinas: '', carbohidratos: '', grasas: '', calorias: '' , urlImage:'', urlImage: alims[3].urlImage},
+        { nombre: '', cantidad: '', unidad: "", cantManual: alims[4].cantManual, proteinas: '', carbohidratos: '', grasas: '', calorias: '' , urlImage:'', urlImage: alims[4].urlImage},
+        { nombre: '', cantidad: '', unidad: "", cantManual: alims[5].cantManual, proteinas: '', carbohidratos: '', grasas: '', calorias: '' , urlImage:'', urlImage: alims[5].urlImage},
+        { nombre: '', cantidad: '', unidad: "", cantManual: alims[6].cantManual, proteinas: '', carbohidratos: '', grasas: '', calorias: '' , urlImage:'', urlImage: alims[6].urlImage}];
 
 
         for (let index = 0; index < alimentos.length; index++) {
@@ -420,6 +419,16 @@ function TablaAlimentos() {
 
 
     };
+
+    const generarAleatorio = () => {
+    let aleatorio =  Math.floor(Math.random() * (60 - 10 + 1)) + 10; 
+    setProteinas(aleatorio)
+    aleatorio =  Math.floor(Math.random() * (100 - 10 + 1)) + 10; 
+    setCarbohidratos(aleatorio)
+    aleatorio =  Math.floor(Math.random() * (40 - 5 + 1)) + 5; 
+    setGrasas(aleatorio)
+
+    }
 
 
 
@@ -655,7 +664,7 @@ function TablaAlimentos() {
                                                 }}
                                             />
                                               
-                                            {
+                                            {/*
                                                 abajo &&
                                                 (<div className="botones-container">
                                                     <button style={{ backgroundColor: '#EDBB99' }} onClick={() => obtenerAleatorioProte(index)}>PR</button>
@@ -664,7 +673,7 @@ function TablaAlimentos() {
                                                 </div>)
 
 
-                                            }
+                                          */}
 
 
                                         </div>
@@ -753,16 +762,19 @@ function TablaAlimentos() {
                     isOpen={showMacros}
                     onRequestClose={() => setMacros(false)}
                     contentLabel="Ejemplo de ventana modal2"
-                    className="modal-estilo"
+                    className="modalmacro"
                 >
                     <Calorias proteinas={proteinas} carbohidratos={carbohidratos} grasas={grasas} setProteinas={setProteinas}
                         setCarbohidratos={setCarbohidratos} setGrasas={setGrasas} calorias={calorias} setCalorias={setCalorias} tipo={"automatico"} />
                     <div>
-                        <button onClick={() => { setCalorias(proteinas * 4 + carbohidratos * 4 + grasas * 9); setMacros(false); }}>Guardar cambios</button>
+                    <button style={{ marginLeft: '30%' }}  type="button" class="btn btn-success"onClick={() => { setCalorias(proteinas * 4 + carbohidratos * 4 + grasas * 9); setMacros(false); }}>Guardar</button>
+                    <button style={{ marginLeft: '10%' }}  type="button" class="btn btn-primary" onClick={()=> {
+                        generarAleatorio()
+                    }}>Aleatorio</button>
+                       
                     </div>
+                    <button   style={{ marginTop:'5%',marginLeft: '43%' }} type="button" class="btn btn-dark" onClick={() => { setMacros(false); setProteinas(0); setCarbohidratos(0); setGrasas(0); setCalorias(0) }} >Cerrar</button>
 
-
-                    <button onClick={() => { setMacros(false); setProteinas(0); setCarbohidratos(0); setGrasas(0); setCalorias(0) }}>Cerrar</button>
                 </Modal>
             )}
 
