@@ -121,9 +121,10 @@ function TablaAlimentos() {
     const [caloriasTotales, setCaloriasTotales] = useState(0);
 
     const [listaAlimentos, setListaAlimentos] = useState([]);
-    const servidor = i
     const i = "https://apifoods-production.up.railway.app";
     const l = "http://localhost:8080"
+    const servidor = i
+
 
     ///"https://apifoods-production.up.railway.app"
     ///ttp://"http://localhost:8080"
