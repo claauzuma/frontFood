@@ -121,11 +121,11 @@ function TablaAlimentos() {
     const [caloriasTotales, setCaloriasTotales] = useState(0);
 
     const [listaAlimentos, setListaAlimentos] = useState([]);
-    const servidor = "http://localhost:8080"
+    const servidor = "https://celebrated-trifle-75e3cb.netlify.app"
 
 
     ///"http://localhost:8080"
-    ///ttp://"http://localhost:8080"
+    ///"https://celebrated-trifle-75e3cb.netlify.app"
 
 
     useEffect(() => {
