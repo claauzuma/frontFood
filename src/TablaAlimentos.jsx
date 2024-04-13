@@ -80,13 +80,13 @@ function TablaAlimentos() {
     };
 
     const [alimentos, setAlimentos] = useState([
-        { nombre: "", cantidad: '', unidad: "", cantManual: '', proteinas: '', carbohidratos: '', grasas: '', calorias: '', mostrarBotones: true },
-        { nombre: '', cantidad: '', unidad: "", cantManual: '', proteinas: '', carbohidratos: '', grasas: '', calorias: '' },
-        { nombre: '', cantidad: '', unidad: "", cantManual: '', proteinas: '', carbohidratos: '', grasas: '', calorias: '' },
-        { nombre: '', cantidad: '', unidad: "", cantManual: '', proteinas: '', carbohidratos: '', grasas: '', calorias: '' },
-        { nombre: '', cantidad: '', unidad: "", cantManual: '', proteinas: '', carbohidratos: '', grasas: '', calorias: '' },
-        { nombre: '', cantidad: '', unidad: "", cantManual: '', proteinas: '', carbohidratos: '', grasas: '', calorias: '' },
-        { nombre: '', cantidad: '', unidad: "", cantManual: '', proteinas: '', carbohidratos: '', grasas: '', calorias: '' }
+        { nombre: "", cantidad: '', unidad: "", cantManual: '', proteinas: '', carbohidratos: '', grasas: '', calorias: '', urlImage:''},
+        { nombre: '', cantidad: '', unidad: "", cantManual: '', proteinas: '', carbohidratos: '', grasas: '', calorias: '' , urlImage:''},
+        { nombre: '', cantidad: '', unidad: "", cantManual: '', proteinas: '', carbohidratos: '', grasas: '', calorias: '' , urlImage:''},
+        { nombre: '', cantidad: '', unidad: "", cantManual: '', proteinas: '', carbohidratos: '', grasas: '', calorias: '' , urlImage:''},
+        { nombre: '', cantidad: '', unidad: "", cantManual: '', proteinas: '', carbohidratos: '', grasas: '', calorias: '' , urlImage:''},
+        { nombre: '', cantidad: '', unidad: "", cantManual: '', proteinas: '', carbohidratos: '', grasas: '', calorias: '' , urlImage:''},
+        { nombre: '', cantidad: '', unidad: "", cantManual: '', proteinas: '', carbohidratos: '', grasas: '', calorias: '' , urlImage:''}
     ]);
 
     const eliminarAlimento = (index) => {
@@ -121,7 +121,7 @@ function TablaAlimentos() {
     const [caloriasTotales, setCaloriasTotales] = useState(0);
 
     const [listaAlimentos, setListaAlimentos] = useState([]);
-    const servidor = "https://apifoods-production.up.railway.app"
+    const servidor = "http://localhost:8080"
 
 
     ///"http://localhost:8080"
@@ -198,6 +198,23 @@ function TablaAlimentos() {
             nuevosAlimentos[index][campo] = selectedOption.value; // Obteniendo el valor seleccionado
             return nuevosAlimentos;
         });
+    };
+
+  
+    const handleUrl  = async (index) => {
+        console.log("Buscamos la url")
+        let nombreAlimento = alimentos[index].nombre
+        const response = await axios.get(`${servidor}/api/alimentos/traerurl/${nombreAlimento}`);
+        const newUrl = response.data;
+        // Crear una copia del estado de alimentos
+        const nuevosAlimentos = [...alimentos];
+        // Actualizar la URL de imagen del alimento en la posición 'index'
+        nuevosAlimentos[index] = {
+            ...nuevosAlimentos[index],
+            urlImage: `${newUrl}` // Interpolar correctamente la variable newUrl
+        };
+        // Establecer el estado de alimentos con la nueva copia actualizada
+        setAlimentos(nuevosAlimentos);
     };
 
     const handleChange2 = (e, index, campo) => {
@@ -332,13 +349,13 @@ function TablaAlimentos() {
 
 
 
-        let nuevaLista = [{ nombre: "", cantidad: '', unidad: "", cantManual: '', proteinas: '', carbohidratos: '', grasas: '', calorias: '' },
-        { nombre: '', cantidad: '', unidad: "", cantManual: '', proteinas: '', carbohidratos: '', grasas: '', calorias: '' },
-        { nombre: '', cantidad: '', unidad: "", cantManual: '', proteinas: '', carbohidratos: '', grasas: '', calorias: '' },
-        { nombre: '', cantidad: '', unidad: "", cantManual: '', proteinas: '', carbohidratos: '', grasas: '', calorias: '' },
-        { nombre: '', cantidad: '', unidad: "", cantManual: '', proteinas: '', carbohidratos: '', grasas: '', calorias: '' },
-        { nombre: '', cantidad: '', unidad: "", cantManual: '', proteinas: '', carbohidratos: '', grasas: '', calorias: '' },
-        { nombre: '', cantidad: '', unidad: "", cantManual: '', proteinas: '', carbohidratos: '', grasas: '', calorias: '' }];
+        let nuevaLista = [{ nombre: "", cantidad: '', unidad: "", cantManual: '', proteinas: '', carbohidratos: '', grasas: '', calorias: '' , urlImage:''},
+        { nombre: '', cantidad: '', unidad: "", cantManual: '', proteinas: '', carbohidratos: '', grasas: '', calorias: '' , urlImage:''},
+        { nombre: '', cantidad: '', unidad: "", cantManual: '', proteinas: '', carbohidratos: '', grasas: '', calorias: '' , urlImage:''},
+        { nombre: '', cantidad: '', unidad: "", cantManual: '', proteinas: '', carbohidratos: '', grasas: '', calorias: '' , urlImage:''},
+        { nombre: '', cantidad: '', unidad: "", cantManual: '', proteinas: '', carbohidratos: '', grasas: '', calorias: '' , urlImage:''},
+        { nombre: '', cantidad: '', unidad: "", cantManual: '', proteinas: '', carbohidratos: '', grasas: '', calorias: '' , urlImage:''},
+        { nombre: '', cantidad: '', unidad: "", cantManual: '', proteinas: '', carbohidratos: '', grasas: '', calorias: '' , urlImage:''}];
 
 
         for (let index = 0; index < alimentos.length; index++) {
@@ -449,7 +466,7 @@ function TablaAlimentos() {
                 </div>
 
                 <div style={{ display: 'flex', alignItems: 'center', marginRight: '20px' }}>
-                <div style={{
+                    <div style={{
                         borderRadius: '50%',
                         width: '30px',
                         height: '30px',
@@ -466,7 +483,7 @@ function TablaAlimentos() {
                 </div>
 
                 <div style={{ display: 'flex', alignItems: 'center' }}>
-                <div style={{
+                    <div style={{
                         borderRadius: '50%',
                         width: '30px',
                         height: '30px',
@@ -483,7 +500,7 @@ function TablaAlimentos() {
                 </div>
 
                 <div style={{ display: 'flex', alignItems: 'center' }}>
-                <div style={{ 
+                    <div style={{
                         color: 'black',
                         marginLeft: '20px',
                         borderRadius: '70%',
@@ -556,8 +573,8 @@ function TablaAlimentos() {
 
 
             <div style={{ marginLeft: '10%', display: 'flex', marginTop: '20px', marginBottom: '10px' }}>
-            <button onClick={() => setAbajo(!abajo)} type="button" class="btn btn-outline-success">Opciones alimentos aleatorios</button>
-      
+                <button onClick={() => setAbajo(!abajo)} type="button" class="btn btn-outline-success">Opciones alimentos aleatorios</button>
+
 
 
             </div>
@@ -602,11 +619,14 @@ function TablaAlimentos() {
                                     >
                                         X
                                     </button>
-
-                                    <img src="/images/pescadoblanco.jpg" alt="" style={{ width: '50px', height: '40px', marginBottom: '1px', marginRight: '5px' }} />
+                                    
+                               
 
                                     <div className='cuadro'>
+                                    <img src={alimento.urlImage} alt="" width="45" height="auto" />
                                         <div>
+
+                                              
 
                                             <Select
                                                 className='classSelect'
@@ -615,6 +635,7 @@ function TablaAlimentos() {
                                                     // Verificar si el alimento seleccionado ya existe en el estado alimentos
                                                     if (!alimentos.some(item => item.nombre === selectedOption.value)) {
                                                         handleChange(selectedOption, index, 'nombre');
+                                                        handleUrl(index);
                                                     } else {
                                                         // Si el alimento ya existe, mostrar alerta
                                                         alert("Este alimento ya está seleccionado");
@@ -633,6 +654,7 @@ function TablaAlimentos() {
                                                     }),
                                                 }}
                                             />
+                                              
                                             {
                                                 abajo &&
                                                 (<div className="botones-container">
