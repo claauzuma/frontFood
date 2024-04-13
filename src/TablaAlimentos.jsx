@@ -121,11 +121,10 @@ function TablaAlimentos() {
     const [caloriasTotales, setCaloriasTotales] = useState(0);
 
     const [listaAlimentos, setListaAlimentos] = useState([]);
-    const servidor = "https://celebrated-trifle-75e3cb.netlify.app"
+    const servidor = "https://apifoods-production.up.railway.app"
 
-
-    ///"http://localhost:8080"
-    ///"https://celebrated-trifle-75e3cb.netlify.app"
+    ///"https://apifoods-production.up.railway.app"
+    ///ttp://"http://localhost:8080"
 
 
     useEffect(() => {
