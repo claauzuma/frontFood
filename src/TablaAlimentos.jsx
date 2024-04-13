@@ -25,6 +25,7 @@ function TablaAlimentos() {
     const [showFaltanGrasas, setFaltanGrasas] = useState(false);
     const [alimentoSeleccionado, setAlimentoSeleccionado] = useState('');
     const [abajo, setAbajo] = useState('false');
+    const [showVentanaAleatoria,setVentanaAleatoria] = useState(false);
 
 
 
@@ -80,13 +81,13 @@ function TablaAlimentos() {
     };
 
     const [alimentos, setAlimentos] = useState([
-        { nombre: "", cantidad: '', unidad: "", cantManual: '', proteinas: '', carbohidratos: '', grasas: '', calorias: '', urlImage:''},
-        { nombre: '', cantidad: '', unidad: "", cantManual: '', proteinas: '', carbohidratos: '', grasas: '', calorias: '' , urlImage:''},
-        { nombre: '', cantidad: '', unidad: "", cantManual: '', proteinas: '', carbohidratos: '', grasas: '', calorias: '' , urlImage:''},
-        { nombre: '', cantidad: '', unidad: "", cantManual: '', proteinas: '', carbohidratos: '', grasas: '', calorias: '' , urlImage:''},
-        { nombre: '', cantidad: '', unidad: "", cantManual: '', proteinas: '', carbohidratos: '', grasas: '', calorias: '' , urlImage:''},
-        { nombre: '', cantidad: '', unidad: "", cantManual: '', proteinas: '', carbohidratos: '', grasas: '', calorias: '' , urlImage:''},
-        { nombre: '', cantidad: '', unidad: "", cantManual: '', proteinas: '', carbohidratos: '', grasas: '', calorias: '' , urlImage:''}
+        { nombre: "", cantidad: '', unidad: "", cantManual: '', proteinas: '', carbohidratos: '', grasas: '', calorias: '', urlImage: '' },
+        { nombre: '', cantidad: '', unidad: "", cantManual: '', proteinas: '', carbohidratos: '', grasas: '', calorias: '', urlImage: '' },
+        { nombre: '', cantidad: '', unidad: "", cantManual: '', proteinas: '', carbohidratos: '', grasas: '', calorias: '', urlImage: '' },
+        { nombre: '', cantidad: '', unidad: "", cantManual: '', proteinas: '', carbohidratos: '', grasas: '', calorias: '', urlImage: '' },
+        { nombre: '', cantidad: '', unidad: "", cantManual: '', proteinas: '', carbohidratos: '', grasas: '', calorias: '', urlImage: '' },
+        { nombre: '', cantidad: '', unidad: "", cantManual: '', proteinas: '', carbohidratos: '', grasas: '', calorias: '', urlImage: '' },
+        { nombre: '', cantidad: '', unidad: "", cantManual: '', proteinas: '', carbohidratos: '', grasas: '', calorias: '', urlImage: '' }
     ]);
 
     const eliminarAlimento = (index) => {
@@ -204,8 +205,8 @@ function TablaAlimentos() {
         });
     };
 
-  
-    const handleUrl  = async (index) => {
+
+    const handleUrl = async (index) => {
         console.log("Buscamos la url")
         let nombreAlimento = alimentos[index].nombre
         const response = await axios.get(`${servidor}/api/alimentos/traerurl/${nombreAlimento}`);
@@ -247,23 +248,23 @@ function TablaAlimentos() {
         console.log("La cantidad manual es " + alimentos[0].cantManual)
         console.log("La cantidad manual es " + alimentos[1].cantManual)
         console.log("La cantidad manual es " + alimentos[2].cantManual)
-    
-            if (proteinas == "" || grasas == "" || carbohidratos == "" || calorias == "") {
-                alert("Completa los campos de macronutrientes")
-            } else {
-                if (alimentos.some(alimento => alimento.nombre !== "")) {
-                    handleGenerarTodo();
 
-                }
-                else {
-                    alert("Elegi al menos un alimento")
-                }
-
+        if (proteinas == "" || grasas == "" || carbohidratos == "" || calorias == "") {
+            alert("Completa los campos de macronutrientes")
+        } else {
+            if (alimentos.some(alimento => alimento.nombre !== "")) {
+                handleGenerarTodo();
 
             }
+            else {
+                alert("Elegi al menos un alimento")
+            }
+
 
         }
-    
+
+    }
+
 
 
     const handleGenerarTodo = async () => {
@@ -351,13 +352,13 @@ function TablaAlimentos() {
 
 
 
-        let nuevaLista = [{ nombre: "", cantidad: '', unidad: "", cantManual: alims[0].cantManual, proteinas: '', carbohidratos: '', grasas: '', calorias: '' , urlImage: alims[0].urlImage},
-        { nombre: '', cantidad: '', unidad: "", cantManual: alims[1].cantManual, proteinas: '', carbohidratos: '', grasas: '', calorias: '' , urlImage:'', urlImage: alims[1].urlImage},
-        { nombre: '', cantidad: '', unidad: "", cantManual: alims[2].cantManual, proteinas: '', carbohidratos: '', grasas: '', calorias: '' , urlImage:'', urlImage: alims[2].urlImage},
-        { nombre: '', cantidad: '', unidad: "", cantManual: alims[3].cantManual, proteinas: '', carbohidratos: '', grasas: '', calorias: '' , urlImage:'', urlImage: alims[3].urlImage},
-        { nombre: '', cantidad: '', unidad: "", cantManual: alims[4].cantManual, proteinas: '', carbohidratos: '', grasas: '', calorias: '' , urlImage:'', urlImage: alims[4].urlImage},
-        { nombre: '', cantidad: '', unidad: "", cantManual: alims[5].cantManual, proteinas: '', carbohidratos: '', grasas: '', calorias: '' , urlImage:'', urlImage: alims[5].urlImage},
-        { nombre: '', cantidad: '', unidad: "", cantManual: alims[6].cantManual, proteinas: '', carbohidratos: '', grasas: '', calorias: '' , urlImage:'', urlImage: alims[6].urlImage}];
+        let nuevaLista = [{ nombre: "", cantidad: '', unidad: "", cantManual: alims[0].cantManual, proteinas: '', carbohidratos: '', grasas: '', calorias: '', urlImage: alims[0].urlImage },
+        { nombre: '', cantidad: '', unidad: "", cantManual: alims[1].cantManual, proteinas: '', carbohidratos: '', grasas: '', calorias: '', urlImage: '', urlImage: alims[1].urlImage },
+        { nombre: '', cantidad: '', unidad: "", cantManual: alims[2].cantManual, proteinas: '', carbohidratos: '', grasas: '', calorias: '', urlImage: '', urlImage: alims[2].urlImage },
+        { nombre: '', cantidad: '', unidad: "", cantManual: alims[3].cantManual, proteinas: '', carbohidratos: '', grasas: '', calorias: '', urlImage: '', urlImage: alims[3].urlImage },
+        { nombre: '', cantidad: '', unidad: "", cantManual: alims[4].cantManual, proteinas: '', carbohidratos: '', grasas: '', calorias: '', urlImage: '', urlImage: alims[4].urlImage },
+        { nombre: '', cantidad: '', unidad: "", cantManual: alims[5].cantManual, proteinas: '', carbohidratos: '', grasas: '', calorias: '', urlImage: '', urlImage: alims[5].urlImage },
+        { nombre: '', cantidad: '', unidad: "", cantManual: alims[6].cantManual, proteinas: '', carbohidratos: '', grasas: '', calorias: '', urlImage: '', urlImage: alims[6].urlImage }];
 
 
         for (let index = 0; index < alimentos.length; index++) {
@@ -424,12 +425,12 @@ function TablaAlimentos() {
     };
 
     const generarAleatorio = () => {
-    let aleatorio =  Math.floor(Math.random() * (60 - 10 + 1)) + 10; 
-    setProteinas(aleatorio)
-    aleatorio =  Math.floor(Math.random() * (100 - 10 + 1)) + 10; 
-    setCarbohidratos(aleatorio)
-    aleatorio =  Math.floor(Math.random() * (40 - 5 + 1)) + 5; 
-    setGrasas(aleatorio)
+        let aleatorio = Math.floor(Math.random() * (60 - 10 + 1)) + 10;
+        setProteinas(aleatorio)
+        aleatorio = Math.floor(Math.random() * (100 - 10 + 1)) + 10;
+        setCarbohidratos(aleatorio)
+        aleatorio = Math.floor(Math.random() * (40 - 5 + 1)) + 5;
+        setGrasas(aleatorio)
 
     }
 
@@ -449,6 +450,19 @@ function TablaAlimentos() {
 
 
     };
+
+
+    const traerComidaAleatoria = () => {
+        setAlimentos([
+            { nombre: "Banana", cantidad: '', unidad: "", cantManual: '', proteinas: '', carbohidratos: '', grasas: '', calorias: '', urlImage: '' },
+            { nombre: "Manzana", cantidad: '', unidad: "", cantManual: '', proteinas: '', carbohidratos: '', grasas: '', calorias: '', urlImage: '' },
+            { nombre: '', cantidad: '', unidad: "", cantManual: '', proteinas: '', carbohidratos: '', grasas: '', calorias: '', urlImage: '' },
+            { nombre: '', cantidad: '', unidad: "", cantManual: '', proteinas: '', carbohidratos: '', grasas: '', calorias: '', urlImage: '' },
+            { nombre: '', cantidad: '', unidad: "", cantManual: '', proteinas: '', carbohidratos: '', grasas: '', calorias: '', urlImage: '' },
+            { nombre: '', cantidad: '', unidad: "", cantManual: '', proteinas: '', carbohidratos: '', grasas: '', calorias: '', urlImage: '' },
+            { nombre: '', cantidad: '', unidad: "", cantManual: '', proteinas: '', carbohidratos: '', grasas: '', calorias: '', urlImage: '' }
+        ]);
+    }
 
 
 
@@ -585,24 +599,23 @@ function TablaAlimentos() {
 
 
             <div style={{ marginLeft: '10%', display: 'flex', marginTop: '20px', marginBottom: '10px' }}>
-                <button onClick={() => setAbajo(!abajo)} type="button" class="btn btn-outline-success">Opciones alimentos aleatorios</button>
+                <button onClick={() => setVentanaAleatoria(!showVentanaAleatoria)} type="button" class="btn btn-outline-success">Opciones alimentos aleatorios</button>
+
+                <button onClick={() => traerComidaAleatoria()} style={{ marginLeft: '10px' }}>
+                    <img src="/images/recargar2.png" alt="Texto alternativo" width="30" height="auto" />
+                </button>
 
 
 
             </div>
 
-            <div style={{ marginLeft: '10%', display: 'flex', marginTop: '-10px', marginBottom: '10px' }}>
-                {
-
-                    abajo && (
-                        <Relleno />
-                    )
-
-                }
-
-
+            <div className='boton-con-imagen' style={{
+                marginLeft: '10%', display: 'flex', marginTop: '-10px', marginBottom: '10px'
+            }}>
+    
 
             </div>
+
 
 
 
@@ -631,14 +644,14 @@ function TablaAlimentos() {
                                     >
                                         X
                                     </button>
-                                    
-                               
+
+
 
                                     <div className='cuadro'>
-                                    <img src={alimento.urlImage} alt="" width="45" height="auto" />
+                                        <img src={alimento.urlImage} alt="" width="45" height="auto" />
                                         <div>
 
-                                              
+
 
                                             <Select
                                                 className='classSelect'
@@ -666,7 +679,7 @@ function TablaAlimentos() {
                                                     }),
                                                 }}
                                             />
-                                              
+
                                             {/*
                                                 abajo &&
                                                 (<div className="botones-container">
@@ -770,14 +783,37 @@ function TablaAlimentos() {
                     <Calorias proteinas={proteinas} carbohidratos={carbohidratos} grasas={grasas} setProteinas={setProteinas}
                         setCarbohidratos={setCarbohidratos} setGrasas={setGrasas} calorias={calorias} setCalorias={setCalorias} tipo={"automatico"} />
                     <div>
-                    <button style={{ marginLeft: '30%' }}  type="button" class="btn btn-success"onClick={() => { setCalorias(proteinas * 4 + carbohidratos * 4 + grasas * 9); setMacros(false); }}>Guardar</button>
-                    <button style={{ marginLeft: '10%' }}  type="button" class="btn btn-primary" onClick={()=> {
-                        generarAleatorio()
-                    }}>Aleatorio</button>
-                       
-                    </div>
-                    <button   style={{ marginTop:'5%',marginLeft: '43%' }} type="button" class="btn btn-dark" onClick={() => { setMacros(false); setProteinas(0); setCarbohidratos(0); setGrasas(0); setCalorias(0) }} >Cerrar</button>
+                        <button style={{ marginLeft: '30%' }} type="button" class="btn btn-success" onClick={() => { setCalorias(proteinas * 4 + carbohidratos * 4 + grasas * 9); setMacros(false); }}>Guardar</button>
+                        <button style={{ marginLeft: '10%' }} type="button" class="btn btn-primary" onClick={() => {
+                            generarAleatorio()
+                        }}>Aleatorio</button>
 
+                    </div>
+                    <button style={{ marginTop: '5%', marginLeft: '43%' }} type="button" class="btn btn-dark" onClick={() => { setMacros(false); setProteinas(0); setCarbohidratos(0); setGrasas(0); setCalorias(0) }} >Cerrar</button>
+
+                </Modal>
+            )}
+
+
+            {showVentanaAleatoria && (
+                <Modal style={{
+                    overlay: {
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center'
+                    }
+                }}
+                    isOpen={showVentanaAleatoria}
+                    onRequestClose={() => setVentanaAleatoria(false)}
+                    contentLabel="Ejemplo de ventana modal2"
+                    className="modal-comida"
+                >
+                    <h3>Vamos a generar una comida aleatoria</h3>
+                    <h5>Que comida es?</h5>
+                    <input type="text" />
+                    <br />
+                    <button onClick={() => setVentanaAleatoria(false)}>Cerrar</button>
+                    <p>Elegi algun alimento que quieras tener</p>
                 </Modal>
             )}
 
