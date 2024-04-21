@@ -25,7 +25,19 @@ function TablaAlimentos() {
     const [showFaltanGrasas, setFaltanGrasas] = useState(false);
     const [alimentoSeleccionado, setAlimentoSeleccionado] = useState('');
     const [abajo, setAbajo] = useState('false');
-    const [showVentanaAleatoria,setVentanaAleatoria] = useState(false);
+    const [showVentanaAleatoria, setVentanaAleatoria] = useState('');
+    const [alimentoSugerido1, setalimentoSugerido1] = useState('');
+    const [alimentoSugerido2, setalimentoSugerido2] = useState('');
+    const [alimentoSugerido3, setalimentoSugerido3] = useState('');
+    const [alimentoSugerido4, setalimentoSugerido4] = useState('');
+    const [tipoComidaSugerida, settipoComidaSugerida] = useState('');
+
+
+    const handleOpcion = (event) => {
+        settipoComidaSugerida(event.target.value);
+
+    };
+
 
 
 
@@ -124,7 +136,7 @@ function TablaAlimentos() {
     const [listaAlimentos, setListaAlimentos] = useState([]);
     const i = "https://apifoods-production.up.railway.app";
     const l = "http://localhost:8080"
-    const servidor = i
+    const servidor = "http://localhost:8080";
 
 
     ///"https://apifoods-production.up.railway.app"
@@ -135,7 +147,7 @@ function TablaAlimentos() {
         const obtenerAlimentos = async () => {
             try {
                 console.log("Obteniendo alimentos")
-                const response = await axios.get(servidor + "/api/alimentos");
+                const response = await axios.get(servidor+ "/api/alimentos");
                 setListaAlimentos(response.data);
 
             } catch (error) {
@@ -244,20 +256,24 @@ function TablaAlimentos() {
     };
 
 
-    const handleGenerarReal = async () => {
-        console.log("La cantidad manual es " + alimentos[0].cantManual)
-        console.log("La cantidad manual es " + alimentos[1].cantManual)
-        console.log("La cantidad manual es " + alimentos[2].cantManual)
+    const handleGenerarReal = async (valor) => {
+        console.log("HOLAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA ME GENEREEEEEEEEEEEEEEEEEEEEEEEEE")
+        console.log(alimentos[0].nombre)
+ 
 
         if (proteinas == "" || grasas == "" || carbohidratos == "" || calorias == "") {
             alert("Completa los campos de macronutrientes")
         } else {
             if (alimentos.some(alimento => alimento.nombre !== "")) {
-                handleGenerarTodo();
+                console.log("AHORA GENERAMOS TODO")
+                handleGenerarTodo(valor);
 
             }
             else {
-                alert("Elegi al menos un alimento")
+               
+                    alert("Elegi al menos un alimento")
+                
+               
             }
 
 
@@ -267,9 +283,13 @@ function TablaAlimentos() {
 
 
 
-    const handleGenerarTodo = async () => {
+    const handleGenerarTodo = async (valor) => {
+           if(valor) {
+            await handleGenerar();
 
-        await handleGenerar();
+           }
+        
+        
 
         setCaloriasTotales(0)
         let nombreAlim1 = "";
@@ -436,10 +456,9 @@ function TablaAlimentos() {
 
 
 
-
-
-
     const handleGenerar = async () => {
+        console.log("EL HANDLE GENEdRAR PIOLAAAAA0")
+        console.log(alimentos[0])
         const nuevasComidas = document.querySelectorAll('.tablaAlimentos tbody tr');
         const nuevosAlimentos = [];
         nuevasComidas.forEach(comida => {
@@ -452,16 +471,30 @@ function TablaAlimentos() {
     };
 
 
-    const traerComidaAleatoria = () => {
-        setAlimentos([
-            { nombre: "Banana", cantidad: '', unidad: "", cantManual: '', proteinas: '', carbohidratos: '', grasas: '', calorias: '', urlImage: '' },
-            { nombre: "Manzana", cantidad: '', unidad: "", cantManual: '', proteinas: '', carbohidratos: '', grasas: '', calorias: '', urlImage: '' },
-            { nombre: '', cantidad: '', unidad: "", cantManual: '', proteinas: '', carbohidratos: '', grasas: '', calorias: '', urlImage: '' },
-            { nombre: '', cantidad: '', unidad: "", cantManual: '', proteinas: '', carbohidratos: '', grasas: '', calorias: '', urlImage: '' },
-            { nombre: '', cantidad: '', unidad: "", cantManual: '', proteinas: '', carbohidratos: '', grasas: '', calorias: '', urlImage: '' },
-            { nombre: '', cantidad: '', unidad: "", cantManual: '', proteinas: '', carbohidratos: '', grasas: '', calorias: '', urlImage: '' },
-            { nombre: '', cantidad: '', unidad: "", cantManual: '', proteinas: '', carbohidratos: '', grasas: '', calorias: '', urlImage: '' }
-        ]);
+    const traerComidaAleatoria = async () => {
+        //let ali1 = "Churrasco magro";
+       //const response = await axios.get(`http://localhost:8080/api/comidas/traerComida/?tipoComida=&alimento1=${ali1}&alimento2=&alimento3=&alimento4=`);
+       //let alimentosDeComida = response.data;
+       //console.log(response.data)
+       const nuevosAlimentos = [{ nombre: "Churrasco magro", cantidad: '', unidad: "", cantManual: '', proteinas: '', carbohidratos: '', grasas: '', calorias: '', urlImage: "" },
+       { nombre: "Banana", cantidad: '', unidad: "", cantManual: '', proteinas: '', carbohidratos: '', grasas: '', calorias: '',  urlImage: "" },
+       { nombre: "", cantidad: '', unidad: "", cantManual: '', proteinas: '', carbohidratos: '', grasas: '', calorias: '',  urlImage: "" },
+       { nombre: "", cantidad: '', unidad: "", cantManual: '', proteinas: '', carbohidratos: '', grasas: '', calorias: '',  urlImage: ""  },
+       { nombre: "", cantidad: '', unidad: "", cantManual: '', proteinas: '', carbohidratos: '', grasas: '', calorias: '',  urlImage: ""  },
+       { nombre: "", cantidad: '', unidad: "", cantManual: '', proteinas: '', carbohidratos: '', grasas: '', calorias: '',  urlImage: ""  },
+       { nombre: "", cantidad: '', unidad: "", cantManual: '', proteinas: '', carbohidratos: '', grasas: '', calorias: '',  urlImage: ""  }]
+       console.log("PRIMERO DEBE IR ESTEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE")
+
+        setAlimentos(nuevosAlimentos);
+        console.log(nuevosAlimentos[0])
+ 
+
+
+
+    
+
+    
+
     }
 
 
@@ -612,7 +645,7 @@ function TablaAlimentos() {
             <div className='boton-con-imagen' style={{
                 marginLeft: '10%', display: 'flex', marginTop: '-10px', marginBottom: '10px'
             }}>
-    
+
 
             </div>
 
@@ -764,7 +797,9 @@ function TablaAlimentos() {
                 <tfoot>
                     <tr>
                         <td colSpan="7">
-                            <button className='boton' onClick={handleGenerarReal}>Generar</button>
+                            <button className='boton' onClick={() => {
+                                handleGenerarReal(false)
+                            }}>Generar</button>
 
                         </td>
                     </tr>
@@ -810,7 +845,13 @@ function TablaAlimentos() {
                 >
                     <h3>Vamos a generar una comida aleatoria</h3>
                     <h5>Que comida es?</h5>
-                    <input type="text" />
+                    <select value={tipoComidaSugerida} onChange={handleOpcion}>
+                        <option value="">Selecciona una opción</option>
+                        <option value="opcion1">Desayuno</option>
+                        <option value="opcion2">Almuerzo</option>
+                        <option value="opcion3">Merienda</option>
+                        <option value="opcion3">Cena</option>
+                    </select>
                     <br />
                     <button onClick={() => setVentanaAleatoria(false)}>Cerrar</button>
                     <p>Elegi algun alimento que quieras tener</p>
