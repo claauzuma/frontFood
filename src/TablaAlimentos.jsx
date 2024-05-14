@@ -136,7 +136,7 @@ function TablaAlimentos() {
     const [listaAlimentos, setListaAlimentos] = useState([]);
     const i = "https://apifoods-production.up.railway.app";
     const l = "http://localhost:8080"
-    const servidor = "http://localhost:8080";
+    const servidor = "https://apifoods-production.up.railway.app";
 
 
     ///"https://apifoods-production.up.railway.app"
