@@ -136,7 +136,7 @@ function TablaAlimentos() {
     const [listaAlimentos, setListaAlimentos] = useState([]);
     const i = "https://apifoods-production.up.railway.app";
     const l = "http://localhost:8080"
-    const servidor = "https://apifoods-production.up.railway.app";
+    const servidor = i;
 
 
     ///"https://apifoods-production.up.railway.app"
@@ -255,35 +255,48 @@ function TablaAlimentos() {
         }
     };
 
-
     const handleGenerarReal = async (valor) => {
-        console.log("HOLAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA ME GENEREEEEEEEEEEEEEEEEEEEEEEEEE")
-        console.log(alimentos[0].nombre)
- 
-
-        if (proteinas == "" || grasas == "" || carbohidratos == "" || calorias == "") {
-            alert("Completa los campos de macronutrientes")
+        console.log("HOLAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA ME GENEREEEEEEEEEEEEEEEEEEEEEEEEE");
+        console.log(alimentos[0].nombre);
+        
+        let alimentosConCantidadManual = [];
+        let hayCantidadManual = false;
+    
+        if (proteinas === "" || grasas === "" || carbohidratos === "" || calorias === "") {
+            alert("Completa los campos de macronutrientes");
         } else {
-            if (alimentos.some(alimento => alimento.nombre !== "")) {
-                console.log("AHORA GENERAMOS TODO")
-                handleGenerarTodo(valor);
+            // Filtrar los alimentos con cantManual > 0
+            alimentosConCantidadManual = alimentos
+                .filter(alimento => parseFloat(alimento.cantManual) > 0)
+                .map(alimento => ({ nombre: alimento.nombre, cantManual: alimento.cantManual }));
+             if(alimentosConCantidadManual.length > 0) {
+                hayCantidadManual = true;
+                while (alimentosConCantidadManual.length < 7) {
+                    alimentosConCantidadManual.push({ nombre: "", cantManual: "" });
+                }
 
+             } 
+
+            // Llenar el resto de la lista con elementos vacíos
+    
+            if (hayCantidadManual > 0) {
+                console.log("Hay al menos un alimento con cantidad manual");
+                console.log(alimentosConCantidadManual); // Aquí tendrás la lista con los atributos "nombre" y "cantManual"
+                handleGenerarTodo(valor, alimentosConCantidadManual);
+        
+
+            } else if (alimentos.some(alimento => alimento.nombre !== "")) {
+                console.log("AHORA GENERAMOS TODO");
+                handleGenerarTodo(valor, alimentosConCantidadManual);
+            } else {
+                alert("Elegi al menos un alimento");
             }
-            else {
-               
-                    alert("Elegi al menos un alimento")
-                
-               
-            }
-
-
         }
-
-    }
-
+    };
 
 
-    const handleGenerarTodo = async (valor) => {
+
+    const handleGenerarTodo = async (valor, alimentosConCantidadManual) => {
            if(valor) {
             await handleGenerar();
 
@@ -312,6 +325,9 @@ function TablaAlimentos() {
 
         if (alimentos[4] && alimentos[4].nombre !== undefined) {
             nombreAlim5 = alimentos[4].nombre;
+
+
+
         }
         if (alimentos[5] && alimentos[5].nombre !== undefined) {
             nombreAlim6 = alimentos[5].nombre;
@@ -320,9 +336,45 @@ function TablaAlimentos() {
         if (alimentos[6] && alimentos[6].nombre !== undefined) {
             nombreAlim7 = alimentos[6].nombre;
         }
+    const alimentoManual1 = alimentosConCantidadManual[0] || { nombre: "", cantManual: "" };
+    const alimentoManual2 = alimentosConCantidadManual[1] || { nombre: "", cantManual: "" };
+    const alimentoManual3 = alimentosConCantidadManual[2] || { nombre: "", cantManual: "" };
+    const alimentoManual4 = alimentosConCantidadManual[3] || { nombre: "", cantManual: "" };
+    const alimentoManual5 = alimentosConCantidadManual[4] || { nombre: "", cantManual: "" };
+    const alimentoManual6 = alimentosConCantidadManual[5] || { nombre: "", cantManual: "" };
+    const alimentoManual7 = alimentosConCantidadManual[6] || { nombre: "", cantManual: "" };
 
 
-        const response = await axios.get(`${servidor}/api/alimentos/distribuciones?alimento1=${alimentos[0].nombre}&alimento2=${nombreAlim2}&alimento3=${nombreAlim3}&alimento4=${nombreAlim4}&alimento5=${nombreAlim5}&alimento6=${nombreAlim6}&alimento7=${nombreAlim7}&proteinas=${proteinas}&carbohidratos=${carbohidratos}&grasas=${grasas}&calorias=${calorias}`);
+  
+
+    const response = await axios.get(`${servidor}/api/alimentos/distribuciones?` +
+        `alimento1=${alimentos[0].nombre}` +
+        `&alimento2=${nombreAlim2}` +
+        `&alimento3=${nombreAlim3}` +
+        `&alimento4=${nombreAlim4}` +
+        `&alimento5=${nombreAlim5}` +
+        `&alimento6=${nombreAlim6}` +
+        `&alimento7=${nombreAlim7}` +
+        `&proteinas=${proteinas}` +
+        `&carbohidratos=${carbohidratos}` +
+        `&grasas=${grasas}` +
+        `&calorias=${calorias}` +
+        `&alimentoManual1=${alimentoManual1.nombre}` +
+        `&cantidadManual1=${alimentoManual1.cantManual}` +
+        `&alimentoManual2=${alimentoManual2.nombre}` +
+        `&cantidadManual2=${alimentoManual2.cantManual}` +
+        `&alimentoManual3=${alimentoManual3.nombre}` +
+        `&cantidadManual3=${alimentoManual3.cantManual}` +
+        `&alimentoManual4=${alimentoManual4.nombre}` +
+        `&cantidadManual4=${alimentoManual4.cantManual}` +
+        `&alimentoManual5=${alimentoManual5.nombre}` +
+        `&cantidadManual5=${alimentoManual5.cantManual}` +
+        `&alimentoManual6=${alimentoManual6.nombre}` +
+        `&cantidadManual6=${alimentoManual6.cantManual}` +
+        `&alimentoManual7=${alimentoManual7.nombre}` +
+        `&cantidadManual7=${alimentoManual7.cantManual}` 
+    );
+
         console.log(response.data)
         let matrizDeAlimentos = response.data;
         console.log("Largo de la matriz final")
